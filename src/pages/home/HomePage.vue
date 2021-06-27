@@ -1,19 +1,16 @@
 <template>
-  <q-page class="page__home column items-center justify-start q-py-lg">
-    <HomeExpansionOptionsComponent
-      title="Example component"
-      active
-    ></HomeExpansionOptionsComponent>
+  <q-page class="page__home column items-center justify-start">
+    <HomeOptionsExpansionComponent></HomeOptionsExpansionComponent>
   </q-page>
 </template>
 
 <script lang="ts">
-import HomeExpansionOptionsComponent from 'components/home/home-expansion-options/HomeExpansionOptionsComponent.vue'
+import HomeOptionsExpansionComponent from 'components/home/home-options-expansion/HomeOptionsExpansionComponent.vue'
 import { Vue, Options } from 'vue-class-component'
 import './home.scss'
 
 @Options({
-  components: { HomeExpansionOptionsComponent }
+  components: { HomeOptionsExpansionComponent }
 })
 export default class HomePage extends Vue {
 }

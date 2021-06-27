@@ -1,5 +1,5 @@
 <template>
-    <q-layout view="hHh Lpr fFf">
+    <q-layout view="hHh Lpr fFf" class="layout__main">
             <Header></Header>
             <Footer></Footer>
             <q-page-container>
@@ -10,6 +10,7 @@
 
 <script lang="ts">
 import { Vue, Options } from 'vue-class-component'
+import './main.scss'
 import Header from 'src/components/header/HeaderComponent.vue'
 import Footer from 'src/components/footer/FooterComponent.vue'
 

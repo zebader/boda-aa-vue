@@ -1,0 +1,21 @@
+.component__countdown {
+    &__wrapper {
+        display: flex;
+        color:$dark;
+        justify-content: space-evenly;
+        align-items: center;
+        max-width: 220px;
+        width: 100%;
+        margin: auto;
+    }
+    &__block {
+        &__digit {
+            font-size: 1rem;
+            font-weight: bold;
+        }
+        &__text {
+            font-size: 1rem;
+            font-style: italic;
+        }
+    }
+}

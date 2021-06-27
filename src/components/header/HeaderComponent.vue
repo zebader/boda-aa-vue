@@ -1,20 +1,27 @@
 <template>
-    <q-header elevated>
+    <q-header unelevated>
         <q-toolbar>
-            <q-btn flat round dense icon="menu" class="q-mr-sm" />
-            <q-avatar>
-                <img src="https://cdn.quasar.dev/logo-v2/svg/logo-mono-white.svg">
-            </q-avatar>
+            <q-img src="~assets/logo-boda-aa.svg" width="30px" height="30px" class="q-mr-xs"/>
+            <q-toolbar-title>
+                <Countdown :date="weddingDate"></Countdown>
+            </q-toolbar-title>
+            <q-btn flat round dense icon="menu" class="q-mr-sm" color="dark"/>
 
-            <q-toolbar-title>Quasar Framework</q-toolbar-title>
-
-            <q-btn flat round dense icon="whatshot" />
         </q-toolbar>
     </q-header>
 </template>
 
 <script lang="ts">
-import { Vue } from 'vue-class-component'
+import { Vue, Options } from 'vue-class-component'
+import Countdown from 'src/components/countdown/CountdownComponent.vue'
 
-export default class HeaderComponent extends Vue {}
+@Options({
+  components: { Countdown }
+})
+
+export default class HeaderComponent extends Vue {
+  get weddingDate () :string {
+    return 'Mon Apr 11 2022 23:59:459 GMT+0200'
+  }
+}
 </script>
