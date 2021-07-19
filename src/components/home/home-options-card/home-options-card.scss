@@ -1,3 +1,11 @@
 .component__home-options-card {
     min-height: 75px;
+    &__titles{
+        &--active{
+            color: $positive;
+        }
+        &--inactive{
+            color:$negative;
+        }
+    }
 }

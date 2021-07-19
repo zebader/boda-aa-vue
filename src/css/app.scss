@@ -1,4 +1,12 @@
+@import url('https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap');
 // app global css in SCSS form
 .q-separator {
     background: rgb(0 0 0 / 5%);
+}
+
+.q-card--bordered {
+    border: 1px solid rgba($secondary,0.2);
+}
+.q-card{
+    border-radius: 10px;
 }
