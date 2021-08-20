@@ -16,14 +16,15 @@
 </template>
 
 <script lang="ts">
-import { Vue } from 'vue-class-component'
-import { Prop } from 'vue-property-decorator'
+import { Vue, prop } from 'vue-class-component'
 import { CountdownClock } from 'components/models'
 import './countdown.scss'
 
-export default class CountdownComponent extends Vue {
-    @Prop({ required: false, default: false, type: String }) date!:string;
+class Props {
+    date = prop<string>({ default: '', required: false, type: String })
+}
 
+export default class CountdownComponent extends Vue.with(Props) {
     now:number = Math.trunc((new Date()).getTime() / 1000);
 
     get dateInMilliseconds ():number {

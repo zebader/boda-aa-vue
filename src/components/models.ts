@@ -27,11 +27,10 @@ export interface GuestItem {
     name: string | null,
     menu: string | null, // aqui molaria un enum
     bus: string | null,
-    formFilled: boolean,
     relatives?: Array<GuestItem>
 }
 
-export interface menuModel {
+export interface optionsModel {
     label: string | null,
     value: string | null,
     description: string | null,

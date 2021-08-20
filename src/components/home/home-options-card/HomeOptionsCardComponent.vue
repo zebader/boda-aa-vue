@@ -12,9 +12,9 @@
             <q-item-label caption>
                 <strong :class="titlesClases(editedGuest.accepted)">Acepta: </strong>{{editedGuest.accepted ? 'Si' : 'No'}}
                 <br>
-                <strong :class="titlesClases(!!editedGuest.menu)">Menu: </strong>{{editedGuest.menu ? editedGuest.menu : 'Ninguno'}}
+                <strong :class="titlesClases(!!editedGuest.menu)">Menu: </strong>{{editedGuest.menu ? editedGuest.menu : '-'}}
                 <br>
-                <strong :class="titlesClases(!!editedGuest.bus)">Bus: </strong>{{editedGuest.bus ? editedGuest.bus : 'Ninguno'}}
+                <strong :class="titlesClases(!!editedGuest.bus)">Bus: </strong>{{editedGuest.bus ? editedGuest.bus : '-'}}
         </q-item-label>
         </q-item-section>
       </q-item>
@@ -81,6 +81,34 @@
                         :options="menuOptions"
                         label="Elige tu menú"
                         clearable
+                        behavior="dialog"
+                        options-selected-class="text-secondary">
+                        <template v-slot:option="scope">
+                        <q-item
+                            v-bind="scope.itemProps"
+                            v-on="scope.itemEvents">
+                            <q-item-section avatar>
+                                <q-icon :name="scope.opt.icon" />
+                            </q-item-section>
+                            <q-item-section>
+                                <q-item-label v-html="scope.opt.label" />
+                                <q-item-label caption>{{ scope.opt.description }}</q-item-label>
+                            </q-item-section>
+                        </q-item>
+                        </template>
+                    </q-select>
+
+                    <q-select
+                        rounded outlined
+                        bg-color="white"
+                        color="secondary"
+                        hint="Selecciona una de las opciones de transporte"
+                        lazy-rules
+                        v-model="guestBusModel"
+                        :options="busOptions"
+                        label="Elige tu medio de transporte"
+                        clearable
+                        behavior="dialog"
                         options-selected-class="text-secondary">
                         <template v-slot:option="scope">
                         <q-item
@@ -108,24 +136,35 @@
 </template>
 
 <script lang="ts">
-import { Vue } from 'vue-class-component'
-import { Prop } from 'vue-property-decorator'
+import { Vue, Options } from 'vue-class-component'
 import './home-options-card.scss'
-import { GuestItem, menuModel } from 'components/models'
+import { GuestItem, optionsModel } from 'components/models'
 
-export default class HomeOptionsCardComponent extends Vue {
-    @Prop({ required: true, default: false, type: Object }) guest!: GuestItem;
+class Props {
+    public guest!:GuestItem;
+}
 
+@Options({
+  emits: ['edit-guest']
+})
+export default class HomeOptionsCardComponent extends Vue.with(Props) {
     editedGuest:GuestItem = {
       accepted: false,
       id: null,
       name: null,
       menu: null,
-      bus: null,
-      formFilled: false
+      bus: null
     };
 
-    guestMenuModel:menuModel = {
+    guestMenuModel:optionsModel = {
+      label: null,
+      value: null,
+      description: null,
+      category: null,
+      icon: null
+    }
+
+    guestBusModel:optionsModel = {
       label: null,
       value: null,
       description: null,
@@ -137,10 +176,10 @@ export default class HomeOptionsCardComponent extends Vue {
     maximizedToggle= true;
 
     get checkIcon (): boolean {
-      return this.editedGuest.formFilled
+      return !!(this.editedGuest.accepted && this.editedGuest.menu && this.editedGuest.bus)
     }
 
-    get menuOptions ():menuModel[] {
+    get menuOptions ():optionsModel[] {
       return [
         {
           label: 'Carne',
@@ -180,6 +219,32 @@ export default class HomeOptionsCardComponent extends Vue {
       ]
     }
 
+    get busOptions ():optionsModel[] {
+      return [
+        {
+          label: 'Manoteras',
+          value: 'manoteras',
+          description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
+          category: '1',
+          icon: 'mail'
+        },
+        {
+          label: 'Alcazar',
+          value: 'alcazar',
+          description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
+          category: '2',
+          icon: 'mail'
+        },
+        {
+          label: 'No necesito',
+          value: 'no necesito',
+          description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
+          category: '3',
+          icon: 'mail'
+        }
+      ]
+    }
+
     titlesClases (condition:boolean):Record<string, boolean> {
       return {
         'component__home-options-card__titles--active': condition,
@@ -190,24 +255,26 @@ export default class HomeOptionsCardComponent extends Vue {
     initGuestValues () {
       this.guestMenuModel.value = this.editedGuest.menu
       this.guestMenuModel.label = this.editedGuest.menu
+      this.guestBusModel.value = this.editedGuest.bus
+      this.guestBusModel.label = this.editedGuest.bus
     }
 
     setValuesToSend () {
       this.editedGuest.menu = this.guestMenuModel.value
+      this.editedGuest.bus = this.guestBusModel.value
     }
 
     editGuestOnSubmit () {
       this.editGuestDialog = false
       this.setValuesToSend()
-      console.log('this.editedGuest', this.editedGuest, this.guestMenuModel)
 
       this.$emit('edit-guest', this.editedGuest)
+
+      return this.editedGuest
     }
 
     created () {
       this.editedGuest = { ...this.guest }
-      console.log('this.editedGuest 1', this.editedGuest, this.guestMenuModel)
-
       this.initGuestValues()
     }
 }

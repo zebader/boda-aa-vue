@@ -14,14 +14,14 @@
                     </template>
                     <div class="q-mx-lg q-mb-lg">
                         <div v-if="item.name === 'preferences'">
-                            <div v-for="guest in guestsList" :key="guest.name" >
-                                <HomeOptionsCardComponent :guest="guest" edit-guest="updateGuest"></HomeOptionsCardComponent>
+                            <div v-for="guest in guestsList" :key="guest.id" >
+                                <HomeOptionsCardComponent :guest="guest" v-on:edit-guest="updateGuest"></HomeOptionsCardComponent>
                             </div>
                             <div class="column q-pa-sm">
                                 <div>
                                     <p class="text-italic">{{addRelativeText}}</p>
                                 </div>
-                                <q-btn unelevated color="secondary" icon="person_add" :label="addRelativeButtonLabel" @click="addRelativeDialog = true" />
+                                <q-btn unelevated color="secondary" icon="person_add" :label="addRelativeButtonLabel" @click="openDialog = true" />
                             </div>
                         </div>
                     </div>
@@ -31,7 +31,7 @@
         </q-list>
     </div>
     <q-dialog
-      v-model="addRelativeDialog"
+      v-model="openDialog"
       persistent
       :maximized="maximizedToggle"
       transition-show="slide-up"
@@ -75,6 +75,59 @@
                 />
                 <q-checkbox left-label v-model="relative.accepted" label="¿Viene a la boda?" color="secondary"/>
 
+                    <q-select
+                        rounded outlined
+                        bg-color="white"
+                        color="secondary"
+                        hint="Selecciona una de las opciones de menu"
+                        lazy-rules
+                        v-model="guestMenuModel"
+                        :options="menuOptions"
+                        label="Elige tu menú"
+                        clearable
+                        behavior="dialog"
+                        options-selected-class="text-secondary">
+                        <template v-slot:option="scope">
+                        <q-item
+                            v-bind="scope.itemProps"
+                            v-on="scope.itemEvents">
+                            <q-item-section avatar>
+                                <q-icon :name="scope.opt.icon" />
+                            </q-item-section>
+                            <q-item-section>
+                                <q-item-label v-html="scope.opt.label" />
+                                <q-item-label caption>{{ scope.opt.description }}</q-item-label>
+                            </q-item-section>
+                        </q-item>
+                        </template>
+                    </q-select>
+
+                    <q-select
+                        rounded outlined
+                        bg-color="white"
+                        color="secondary"
+                        hint="Selecciona una de las opciones de transporte"
+                        lazy-rules
+                        v-model="guestBusModel"
+                        :options="busOptions"
+                        label="Elige tu medio de transporte"
+                        clearable
+                        behavior="dialog"
+                        options-selected-class="text-secondary">
+                        <template v-slot:option="scope">
+                        <q-item
+                            v-bind="scope.itemProps"
+                            v-on="scope.itemEvents">
+                            <q-item-section avatar>
+                                <q-icon :name="scope.opt.icon" />
+                            </q-item-section>
+                            <q-item-section>
+                                <q-item-label v-html="scope.opt.label" />
+                                <q-item-label caption>{{ scope.opt.description }}</q-item-label>
+                            </q-item-section>
+                        </q-item>
+                        </template>
+                    </q-select>
                 <div>
                     <q-btn label="Submit" type="submit" color="secondary" unelevated/>
                     <q-btn label="Reset" type="reset" color="secondary" flat class="q-ml-sm" />
@@ -90,23 +143,105 @@
 import { Vue, Options } from 'vue-class-component'
 import HomeOptionsCardComponent from 'components/home/home-options-card/HomeOptionsCardComponent.vue'
 import './home-options-expansion.scss'
-import { OptionItem, GuestItem } from 'components/models'
+import { OptionItem, GuestItem, optionsModel } from 'components/models'
 
 @Options({
   components: { HomeOptionsCardComponent }
 })
 export default class HomeOptionsExpansionComponent extends Vue {
     guestsList:Array<GuestItem> = [];
-    addRelativeDialog= false;
-    maximizedToggle= true;
+    openDialog = false;
+    maximizedToggle = true;
+
     relative:GuestItem = {
       accepted: false,
       id: null,
       name: null,
       menu: null,
-      bus: null,
-      formFilled: false
+      bus: null
     };
+
+    guestMenuModel:optionsModel = {
+      label: null,
+      value: null,
+      description: null,
+      category: null,
+      icon: null
+    }
+
+    guestBusModel:optionsModel = {
+      label: null,
+      value: null,
+      description: null,
+      category: null,
+      icon: null
+    }
+
+    get menuOptions ():optionsModel[] {
+      return [
+        {
+          label: 'Carne',
+          value: 'carne',
+          description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
+          category: '1',
+          icon: 'mail'
+        },
+        {
+          label: 'Pescado',
+          value: 'pescado',
+          description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
+          category: '2',
+          icon: 'mail'
+        },
+        {
+          label: 'Vegetariano',
+          value: 'vegetariano',
+          description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
+          category: '3',
+          icon: 'mail'
+        },
+        {
+          label: 'Vegano',
+          value: 'vegano',
+          description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
+          category: '3',
+          icon: 'mail'
+        },
+        {
+          label: 'Sin Gluten',
+          value: 'singluten',
+          description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
+          category: '3',
+          icon: 'mail'
+        }
+      ]
+    }
+
+    get busOptions ():optionsModel[] {
+      return [
+        {
+          label: 'Manoteras',
+          value: 'manoteras',
+          description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
+          category: '1',
+          icon: 'mail'
+        },
+        {
+          label: 'Alcazar',
+          value: 'alcazar',
+          description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
+          category: '2',
+          icon: 'mail'
+        },
+        {
+          label: 'No necesito',
+          value: 'no necesito',
+          description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
+          category: '3',
+          icon: 'mail'
+        }
+      ]
+    }
 
     get optionItems () : Array<OptionItem> {
       return [
@@ -149,8 +284,7 @@ export default class HomeOptionsExpansionComponent extends Vue {
           id: '1',
           name: 'Jesus Cebader',
           menu: 'vegetariano', // aqui molaria un enum
-          bus: 'Manoteras',
-          formFilled: true
+          bus: 'Manoteras'
         }
       ]
       const fetchedUserRelatives:GuestItem[] = [
@@ -159,17 +293,26 @@ export default class HomeOptionsExpansionComponent extends Vue {
           id: '2',
           name: 'Raquel Navarro',
           menu: '', // aqui molaria un enum
-          bus: null,
-          formFilled: false
+          bus: null
         }
       ]
 
       this.guestsList = [...fetchedUser, ...fetchedUserRelatives]
     }
 
+    initGuestValues () {
+      this.guestMenuModel.value = this.relative.menu
+      this.guestMenuModel.label = this.relative.menu
+      this.guestBusModel.value = this.relative.bus
+      this.guestBusModel.label = this.relative.bus
+    }
+
     addRelativeOnSubmit () {
       if (!this.relative.name) return
-      this.addRelativeDialog = false
+      this.openDialog = false
+      this.relative.menu = this.guestMenuModel.value
+      this.relative.bus = this.guestBusModel.value
+
       this.guestsList.push(this.relative)
       this.addRelativeOnReset()
     }
@@ -180,8 +323,7 @@ export default class HomeOptionsExpansionComponent extends Vue {
         id: null,
         name: null,
         menu: null,
-        bus: null,
-        formFilled: false
+        bus: null
       }
     }
 
