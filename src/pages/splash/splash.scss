@@ -1,0 +1,38 @@
+.page__splash {
+    max-width: 600px;
+    width: 100%;
+    margin: auto;
+    overflow: hidden;
+    &__image-animation {
+        animation-delay: 500ms;
+        animation-duration: 1s;
+    }
+    &__title-container{
+        &__text {
+            color:$secondary;
+            font-size: 21px;
+            margin-bottom: 0px;
+        }
+        &__title {
+            font-family: $font-family-titles;
+            font-size: 42px;
+            color: $indigo;
+            text-align: center;
+        }
+    }
+    &__date-container {
+        &__text {
+            color:$indigo;
+            font-size: 21px;
+            text-align: center;
+            &--strong {
+                margin: 0;
+                font-weight: bold;
+            }
+        }
+    }
+    &__button-container {
+        width: 100%;
+        max-width: 350px;
+    }
+}
