@@ -11,6 +11,31 @@ const routes: RouteRecordRaw[] = [
     component: () => import('layouts/CleanLayout.vue'),
     children: [{ path: '', component: () => import('src/pages/splash/SplashPage.vue') }]
   },
+  {
+    path: '/login',
+    component: () => import('layouts/HeaderLayout.vue'),
+    children: [
+      { path: '', component: () => import('src/pages/login/LoginPage.vue') }
+    ]
+  },
+  {
+    path: '/signin',
+    component: () => import('layouts/HeaderLayout.vue'),
+    children: [
+      {
+        path: '',
+        component: () => import('src/pages/login/LoginPage.vue'),
+        props: {
+          signInRoute: true
+        }
+      }
+    ]
+  },
+  {
+    path: '/onboarding',
+    component: () => import('layouts/HeaderLayout.vue'),
+    children: [{ path: '', component: () => import('src/pages/onboarding/OnBoardingPage.vue') }]
+  },
   // Always leave this as last one,
   // but you can also remove it
   {

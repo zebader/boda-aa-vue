@@ -7,6 +7,7 @@ import {
 } from 'vue-router'
 import { StateInterface } from '../store'
 import routes from './routes'
+import AuthService from '../services/AuthService'
 
 /*
  * If not building with SSR mode, you can
@@ -32,6 +33,28 @@ export default route<StateInterface>(function (/* { store, ssrContext } */) {
     history: createHistory(
       process.env.MODE === 'ssr' ? void 0 : process.env.VUE_ROUTER_BASE
     )
+  })
+
+  Router.beforeEach(async (to, from, next) => {
+    if (to.path === '/signin') {
+      // Abstraer en clase y guardar user en vuex
+      const authService:AuthService = new AuthService()
+      let response:AuthService | null
+      let path
+      try {
+        response = await authService.me()
+        path = response ? { path: '/welcome' } : { path: '/signin' }
+        console.log('usuario sesionado,', response)
+        if (response) {
+          next({ path: path.path })
+        }
+      } catch (error) {
+        console.log('error al sessionar al usuario', error)
+        next()
+      }
+    } else {
+      next()
+    }
   })
 
   return Router

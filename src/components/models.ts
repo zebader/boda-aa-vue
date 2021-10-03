@@ -30,10 +30,10 @@ export interface GuestItem {
     relatives?: Array<GuestItem>
 }
 
-export interface optionsModel {
+export interface OptionsModel {
     label: string | null,
     value: string | null,
-    description: string | null,
+    description?: string | null,
     category?: string | null,
     icon?: string | null
 }

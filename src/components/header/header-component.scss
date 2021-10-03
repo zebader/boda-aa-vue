@@ -1,0 +1,16 @@
+.component__header {
+    &__title {
+        font-family: $font-family-titles;
+        font-size: 26px;
+        color: $indigo;
+        text-align: right;
+        margin-bottom: 0;
+    }
+    &__subtitle {
+        color:$secondary;
+        font-size: 15px;
+        text-align: right;
+        margin-top: -5px;
+        margin-bottom: 0;
+    }
+}

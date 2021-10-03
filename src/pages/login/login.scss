@@ -1,0 +1,13 @@
+.page__login {
+    max-width: 600px;
+    width: 100%;
+    margin: auto;
+    overflow: hidden;
+    &__animation {
+        animation-duration: 1s;
+    }
+    &__animation-delay {
+        animation-delay: 1s;
+        animation-duration: 1s;
+    }
+}

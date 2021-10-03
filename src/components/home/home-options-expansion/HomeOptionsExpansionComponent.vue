@@ -143,7 +143,7 @@
 import { Vue, Options } from 'vue-class-component'
 import HomeOptionsCardComponent from 'components/home/home-options-card/HomeOptionsCardComponent.vue'
 import './home-options-expansion.scss'
-import { OptionItem, GuestItem, optionsModel } from 'components/models'
+import { OptionItem, GuestItem, OptionsModel } from 'components/models'
 
 @Options({
   components: { HomeOptionsCardComponent }
@@ -161,7 +161,7 @@ export default class HomeOptionsExpansionComponent extends Vue {
       bus: null
     };
 
-    guestMenuModel:optionsModel = {
+    guestMenuModel:OptionsModel = {
       label: null,
       value: null,
       description: null,
@@ -169,7 +169,7 @@ export default class HomeOptionsExpansionComponent extends Vue {
       icon: null
     }
 
-    guestBusModel:optionsModel = {
+    guestBusModel:OptionsModel = {
       label: null,
       value: null,
       description: null,
@@ -177,7 +177,7 @@ export default class HomeOptionsExpansionComponent extends Vue {
       icon: null
     }
 
-    get menuOptions ():optionsModel[] {
+    get menuOptions ():OptionsModel[] {
       return [
         {
           label: 'Carne',
@@ -217,7 +217,7 @@ export default class HomeOptionsExpansionComponent extends Vue {
       ]
     }
 
-    get busOptions ():optionsModel[] {
+    get busOptions ():OptionsModel[] {
       return [
         {
           label: 'Manoteras',

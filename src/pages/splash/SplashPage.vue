@@ -22,12 +22,12 @@
             <p class="page__splash__date-container__text">Alcazar de San Juan</p>
         </div>
         <div class="q-my-sm q-px-md page__splash__button-container">
-                    <transition
-            appear
-            enter-active-class="animated bounceInUp page__splash__image-animation"
-            leave-active-class="animated bounceInDown page__splash__image-animation">
-            <q-btn unelevated no-caps color="indigo" icon-right="login" label="Entrar" size="lg" class="q-ma-sm full-width"/>
-                    </transition>
+            <transition
+                appear
+                enter-active-class="animated bounceInUp page__splash__image-animation"
+                leave-active-class="animated bounceInDown page__splash__image-animation">
+                <q-btn unelevated no-caps color="indigo" icon-right="login" label="Entrar" size="lg" class="q-ma-sm full-width"/>
+            </transition>
             <q-btn flat no-caps color="indigo" label="Más detalles" size="md" class="q-ma-sm full-width" @click="toggleDialog"/>
         </div>
     </q-page>

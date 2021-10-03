@@ -138,7 +138,7 @@
 <script lang="ts">
 import { Vue, Options } from 'vue-class-component'
 import './home-options-card.scss'
-import { GuestItem, optionsModel } from 'components/models'
+import { GuestItem, OptionsModel } from 'components/models'
 
 class Props {
     public guest!:GuestItem;
@@ -156,7 +156,7 @@ export default class HomeOptionsCardComponent extends Vue.with(Props) {
       bus: null
     };
 
-    guestMenuModel:optionsModel = {
+    guestMenuModel:OptionsModel = {
       label: null,
       value: null,
       description: null,
@@ -164,7 +164,7 @@ export default class HomeOptionsCardComponent extends Vue.with(Props) {
       icon: null
     }
 
-    guestBusModel:optionsModel = {
+    guestBusModel:OptionsModel = {
       label: null,
       value: null,
       description: null,
@@ -179,7 +179,7 @@ export default class HomeOptionsCardComponent extends Vue.with(Props) {
       return !!(this.editedGuest.accepted && this.editedGuest.menu && this.editedGuest.bus)
     }
 
-    get menuOptions ():optionsModel[] {
+    get menuOptions ():OptionsModel[] {
       return [
         {
           label: 'Carne',
@@ -219,7 +219,7 @@ export default class HomeOptionsCardComponent extends Vue.with(Props) {
       ]
     }
 
-    get busOptions ():optionsModel[] {
+    get busOptions ():OptionsModel[] {
       return [
         {
           label: 'Manoteras',

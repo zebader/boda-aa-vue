@@ -1,3 +1,6 @@
 .layout__main {
     background-color: rgba($primary, 0.5);
+    &--marble {
+        background-image:url("../assets/background-marble.jpg");
+    }
 }

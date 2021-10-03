@@ -1,0 +1,27 @@
+.page__onboarding {
+    max-width: 600px;
+    width: 100%;
+    margin: auto;
+    &__title-container {
+        border-bottom: 1px solid $secondary;
+        width: 100%;
+        &__intro-text {
+            color:$secondary;
+            font-size: 21px;
+            margin-bottom: 0px;
+            text-align: left;
+            & span {
+                color: $indigo;
+            }
+        }
+    }
+    &__stepper-container {
+        width: 100%;
+        &__intro-text {
+            color: $secondary;
+            & span {
+                color: $indigo;
+            }
+        }
+    }
+}
