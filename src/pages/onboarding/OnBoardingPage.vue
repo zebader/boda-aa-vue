@@ -24,8 +24,8 @@
                     title="¿Podras asistir a la boda?"
                     prefix="1"
                     :done="step > 1">
-                    La boda se celebrará el 18 de Abril de 2022 en Alcazar ...,
-                    Recuerda que hay transporte a tu disposición y descuentos en estancias
+                    <p>La boda se celebrará el 18 de Abril de 2022 en Alcazar ...,
+                    Recuerda que hay transporte a tu disposición y descuentos en estancias</p>
 
                     <q-stepper-navigation>
                         <q-btn @click="step = 2" color="indigo">
@@ -74,7 +74,7 @@
                     title="¿Tienes alguna intolerancia?"
                     prefix="3"
                     :done="step > 3">
-                    Si tienes alguna intolerancia indicanos cual sino, continua:
+                    <p>Si tienes alguna intolerancia indicanos cual sino, continua:</p>
                         <q-input
                         v-model="intoleranceOption"
                         filled
@@ -92,8 +92,7 @@
                     title="¿Necesitas transporte?"
                     prefix="4"
                     :done="step > 4">
-                    Te ofrecemos la posibilidad de elegir la lanzadera
-                    que te venga mejor gratuitamente.
+                    <p>Te ofrecemos la posibilidad de elegir la lanzaderaque te venga mejor gratuitamente.</p>
                      <q-select
                     filled
                     color="indigo"
@@ -131,12 +130,29 @@
       <q-card class="bg-primary">
         <q-toolbar class="bg-primary q-py-sm q-px-md">
             <q-toolbar-title>
-                <span class="text-h6">Revisa tus datos antes de enviar</span>
+                <span class="text-h6">Resumen y finalizar</span>
             </q-toolbar-title>
-
             <q-btn flat round icon="close" @click="closeFinishDialog"></q-btn>
         </q-toolbar>
         <q-separator />
+            <div class="page__onboarding__dialog__container column q-mb-xl q-pa-xl">
+                <p class="page__onboarding__dialog__container__intro-text">
+                    Revisa tus datos antes de enviar:
+                </p>
+                <p class="page__onboarding__dialog__container__message q-mb-xl" v-html="resumeMessage"></p>
+                <div class="page__onboarding__dialog__submit-container column justify-end">
+                    <q-btn
+                        unelevated
+                        no-caps
+                        type="submit"
+                        color="indigo"
+                        label="Finalizar y añadir acompañantes"
+                        size="lg"
+                        class="q-ma-sm full-width"
+                        to="/welcome"/>
+                    <q-btn flat no-caps color="indigo" label="Atrás, revisar datos" size="md" class="q-ma-sm full-width" @click="closeFinishDialog"/>
+                </div>
+            </div>
       </q-card>
     </q-dialog>
     </q-page>
@@ -147,12 +163,13 @@
 import { Vue, Options } from 'vue-class-component'
 import './onboarding.scss'
 import { OptionsModel } from 'components/models'
-const meatIcon = require('../../assets/meat.png')
-const fishIcon = require('../../assets/fish.png')
-const veggiIcon = require('../../assets/veggi.png')
-const veganIcon = require('../../assets/vegan.png')
-const busIcon = require('../../assets/bus.png')
-const carIcon = require('../../assets/car.png')
+
+const meatIcon: string | null = require('../../assets/meat.png')
+const fishIcon: string | null = require('../../assets/fish.png')
+const veggiIcon: string | null = require('../../assets/veggi.png')
+const veganIcon: string | null = require('../../assets/vegan.png')
+const busIcon: string | null = require('../../assets/bus.png')
+const carIcon: string | null = require('../../assets/car.png')
 
 @Options({})
 export default class OnBoardingPage extends Vue {
@@ -241,6 +258,15 @@ export default class OnBoardingPage extends Vue {
 
     get finishSubmitDisabled ():boolean {
       return !this.guestBusModel.value
+    }
+
+    get resumeMessage ():string {
+      return `
+            Mi nombre es [Jesus Cebader Rodriguez], confirmo que <span>asistire</span> a la boda y que:<br><br>
+            Elijo el menú de <span>${this.guestMenuModel.label ? this.guestMenuModel.label : ''}</span>,<br>
+            <span>${this.intoleranceOption ? 'Si tengo intolerancias, a ' + this.intoleranceOption : 'No tengo intolerancias'}</span><br>
+            y ${this.guestBusModel.category === '3' ? '<span>no necesito transporte</span>' : `Necesito transporte desde <span>${this.guestBusModel.label ? this.guestBusModel.label : ''}</span>`}
+        `
     }
 
     showFinishDialog () {

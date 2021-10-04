@@ -17,11 +17,36 @@
     }
     &__stepper-container {
         width: 100%;
+        color: $indigo;
         &__intro-text {
             color: $secondary;
             & span {
                 color: $indigo;
             }
         }
+    }
+    &__dialog {
+        &__container {
+            max-width: 600px;
+            margin: auto;
+            height: 100%;
+            &__intro-text {
+                color:$secondary;
+                font-size: 21px;
+                text-align: left;
+                & span {
+                    color: $indigo;
+                }
+            }
+            &__message {
+                color: $indigo;
+                & span {
+                    font-weight: bold;
+                }
+            }
+        }
+    }
+    .q-stepper__title {
+        font-weight: bold;
     }
 }
