@@ -1,11 +1,17 @@
 .component__home-options-card {
     min-height: 75px;
+    border: 1px solid $secondary;
     &__titles{
         &--active{
-            color: $positive;
+            color: $indigo;
         }
         &--inactive{
             color:$negative;
         }
+    }
+    &__avatar {
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
     }
 }

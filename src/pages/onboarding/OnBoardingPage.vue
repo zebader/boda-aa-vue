@@ -149,7 +149,7 @@
                         label="Finalizar y añadir acompañantes"
                         size="lg"
                         class="q-ma-sm full-width"
-                        to="/welcome"/>
+                        to="/flyer"/>
                     <q-btn flat no-caps color="indigo" label="Atrás, revisar datos" size="md" class="q-ma-sm full-width" @click="closeFinishDialog"/>
                 </div>
             </div>
@@ -164,12 +164,12 @@ import { Vue, Options } from 'vue-class-component'
 import './onboarding.scss'
 import { OptionsModel } from 'components/models'
 
-const meatIcon: string | null = require('../../assets/meat.png')
-const fishIcon: string | null = require('../../assets/fish.png')
-const veggiIcon: string | null = require('../../assets/veggi.png')
-const veganIcon: string | null = require('../../assets/vegan.png')
-const busIcon: string | null = require('../../assets/bus.png')
-const carIcon: string | null = require('../../assets/car.png')
+const meatIcon: string = require('../../assets/meat.png') as string
+const fishIcon: string = require('../../assets/fish.png') as string
+const veggiIcon: string = require('../../assets/veggi.png') as string
+const veganIcon: string = require('../../assets/vegan.png') as string
+const busIcon: string = require('../../assets/bus.png') as string
+const carIcon: string = require('../../assets/car.png') as string
 
 @Options({})
 export default class OnBoardingPage extends Vue {

@@ -3,7 +3,10 @@ import { RouteRecordRaw } from 'vue-router'
 const routes: RouteRecordRaw[] = [
   {
     path: '/',
-    component: () => import('layouts/MainLayout.vue'),
+    component: () => import('layouts/HeaderLayout.vue'),
+    props: {
+      isCentered: true
+    },
     children: [{ path: '', component: () => import('src/pages/home/HomePage.vue') }]
   },
   {
@@ -35,6 +38,11 @@ const routes: RouteRecordRaw[] = [
     path: '/onboarding',
     component: () => import('layouts/HeaderLayout.vue'),
     children: [{ path: '', component: () => import('src/pages/onboarding/OnBoardingPage.vue') }]
+  },
+  {
+    path: '/flyer',
+    component: () => import('layouts/HeaderLayout.vue'),
+    children: [{ path: '', component: () => import('src/pages/flyer/Flyer.vue') }]
   },
   // Always leave this as last one,
   // but you can also remove it

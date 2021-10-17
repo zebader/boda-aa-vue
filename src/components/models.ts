@@ -25,6 +25,7 @@ export interface GuestItem {
     accepted: boolean,
     id:string | null,
     name: string | null,
+    intolerance?: string | null,
     menu: string | null, // aqui molaria un enum
     bus: string | null,
     relatives?: Array<GuestItem>

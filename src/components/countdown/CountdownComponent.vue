@@ -59,19 +59,19 @@ export default class CountdownComponent extends Vue.with(Props) {
       return [
         {
           digit: this.days,
-          text: 'D'
+          text: 'días'
         },
         {
           digit: this.hours,
-          text: 'h'
+          text: 'horas'
         },
         {
           digit: this.minutes,
-          text: 'm'
+          text: 'min.'
         },
         {
           digit: this.seconds,
-          text: 's'
+          text: 'seg.'
         }]
     }
 

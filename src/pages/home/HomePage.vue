@@ -1,6 +1,5 @@
 <template>
   <q-page class="page__home column items-center justify-start">
-    <HomeWelcomeCardComponent></HomeWelcomeCardComponent>
     <HomeOptionsExpansionComponent></HomeOptionsExpansionComponent>
   </q-page>
 </template>

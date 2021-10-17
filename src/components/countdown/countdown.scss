@@ -1,7 +1,7 @@
 .component__countdown {
     &__wrapper {
         display: flex;
-        color:$dark;
+        color:$indigo;
         justify-content: space-evenly;
         align-items: center;
         max-width: 220px;
@@ -10,12 +10,13 @@
     }
     &__block {
         &__digit {
-            font-size: 1rem;
+            font-size: 15px;
             font-weight: bold;
         }
         &__text {
-            font-size: 1rem;
+            font-size: 12px;
             font-style: italic;
+            color: $secondary;
         }
     }
 }

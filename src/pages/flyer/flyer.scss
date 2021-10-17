@@ -1,0 +1,38 @@
+.page__flyer {
+    max-width: 600px;
+    width: 100%;
+    margin: auto;
+    &__title-container {
+        border-bottom: 1px solid $secondary;
+        width: 100%;
+        &__intro-text {
+            color:$secondary;
+            font-size: 21px;
+            margin-bottom: 0px;
+            text-align: left;
+            & span {
+                color: $indigo;
+            }
+        }
+    }
+    &__container {
+        width: 100%;
+        color: $indigo;
+        &__intro-text {
+            color: $secondary;
+            & span {
+                color: $indigo;
+            }
+        }
+        &__carousel-text {
+            color: $secondary;
+            & span {
+                color: $indigo;
+            }
+            font-size: 18px;
+        }
+    }
+    &__animation {
+        animation-duration: 1s;
+    }
+}
