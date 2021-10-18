@@ -1,0 +1,9 @@
+.component__onboarding-stepper {
+    &__container {
+        width: 100%;
+        color: $indigo;
+    }
+    .q-stepper__title {
+        font-weight: bold;
+    }
+}

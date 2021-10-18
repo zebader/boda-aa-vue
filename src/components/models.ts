@@ -38,3 +38,10 @@ export interface OptionsModel {
     category?: string | null,
     icon?: string | null
 }
+
+export interface GuestFinalInfoModel {
+    guest?: GuestItem | null
+    menu:OptionsModel | null,
+    bus:OptionsModel | null,
+    intolerance:string | null
+}

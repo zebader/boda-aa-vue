@@ -10,35 +10,29 @@
         <q-item-section>
             <q-item-label class="text-bold text-indigo q-mb-sm">{{editedGuest.name}}</q-item-label>
             <q-item-label caption>
-                <strong :class="titlesClases(editedGuest.accepted)">Acepta: </strong>{{editedGuest.accepted ? 'Si' : 'No'}}
-                <br>
-                <strong :class="titlesClases(!!editedGuest.menu)">Menu: </strong>{{editedGuest.menu ? editedGuest.menu : '-'}}
-                <br>
-                <strong :class="titlesClases(!!editedGuest.intolerance)">Intolerancia: </strong>{{editedGuest.intolerance ? editedGuest.intolerance : 'No'}}
-                <br>
-                <strong :class="titlesClases(!!editedGuest.bus)">Bus: </strong>{{editedGuest.bus ? editedGuest.bus : '-'}}
+                <!-- <p class="component__home-options-card__titles">Acepta: <span>{{editedGuest.accepted ? 'Si' : 'No'}}</span></p> -->
+                <p class="component__home-options-card__titles">Menu: <span>{{editedGuest.menu ? editedGuest.menu : '-'}}</span></p>
+                <p class="component__home-options-card__titles">Intolerancia: <span>{{editedGuest.intolerance ? editedGuest.intolerance : 'No'}}</span></p>
+                <p class="component__home-options-card__titles">Bus: <span>{{editedGuest.bus ? editedGuest.bus : '-'}}</span></p>
         </q-item-label>
         </q-item-section>
       </q-item>
-      <div class="column items-center">
-        <q-btn flat round color="secondary" icon="edit" class="q-mx-sm" @click="editGuestDialog = true" />
+      <div class="column items-center justify-between">
+        <q-btn flat round color="secondary" icon="edit" class="q-mx-sm" @click="openEditGuestDialog" />
+        <q-btn flat round color="secondary" icon="delete" class="q-mx-sm" @click="openDeleteGuestDialog" />
       </div>
     </q-card>
 </template>
 
 <script lang="ts">
-import { Vue, Options } from 'vue-class-component'
+import { Vue } from 'vue-class-component'
+import { Emit, Prop, Watch } from 'vue-property-decorator'
 import './home-options-card.scss'
 import { GuestItem } from 'components/models'
 
-class Props {
-    public guest!:GuestItem;
-}
+export default class HomeOptionsCardComponent extends Vue {
+    @Prop({ required: false, default: {}, type: Object }) guest!:GuestItem;
 
-@Options({
-  emits: ['edit-guest']
-})
-export default class HomeOptionsCardComponent extends Vue.with(Props) {
     editedGuest:GuestItem = {
       accepted: false,
       id: null,
@@ -51,11 +45,19 @@ export default class HomeOptionsCardComponent extends Vue.with(Props) {
     editGuestDialog = false;
     maximizedToggle= true;
 
-    titlesClases (condition:boolean):Record<string, boolean> {
-      return {
-        'component__home-options-card__titles--active': condition,
-        'component__home-options-card__titles--inactive': !condition
-      }
+    @Watch('guest')
+    updateEditedGuest (newEditedGuest: GuestItem) {
+      this.editedGuest = { ...newEditedGuest }
+    }
+
+    @Emit('open-edit-guest-dialog')
+    openEditGuestDialog () {
+      return this.editedGuest
+    }
+
+    @Emit('open-delete-guest-dialog')
+    openDeleteGuestDialog () {
+      return this.editedGuest
     }
 
     created () {
