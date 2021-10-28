@@ -28,17 +28,17 @@
 import { Vue } from 'vue-class-component'
 import { Emit, Prop, Watch } from 'vue-property-decorator'
 import './home-options-card.scss'
-import { GuestItem } from 'components/models'
+import { UserItem } from 'components/models'
 
 export default class HomeOptionsCardComponent extends Vue {
-    @Prop({ required: false, default: {}, type: Object }) guest!:GuestItem;
+    @Prop({ required: false, default: {}, type: Object }) guest!:UserItem;
 
-    editedGuest:GuestItem = {
-      accepted: false,
-      id: null,
+    editedGuest:UserItem = {
+      accepted: 'waiting',
+      _id: null,
       name: null,
       menu: null,
-      intolerance: null,
+      intolerance: '',
       bus: null
     };
 
@@ -46,7 +46,7 @@ export default class HomeOptionsCardComponent extends Vue {
     maximizedToggle= true;
 
     @Watch('guest')
-    updateEditedGuest (newEditedGuest: GuestItem) {
+    updateEditedGuest (newEditedGuest: UserItem) {
       this.editedGuest = { ...newEditedGuest }
     }
 

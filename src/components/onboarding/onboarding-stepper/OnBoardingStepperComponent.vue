@@ -52,7 +52,7 @@
                             <img width="40" class="q-mr-sm" src="~assets/heart.png">
                         </q-tooltip>
                     </q-btn>
-                    <q-btn flat @click="step = 1" color="indigo" label="No" class="q-ml-sm" />
+                    <q-btn flat @click="acceptedNo" color="indigo" label="No" class="q-ml-sm" />
                 </q-stepper-navigation>
             </q-step>
             <q-step
@@ -139,6 +139,21 @@
             </q-step>
         </q-stepper>
     </div>
+        <q-dialog v-model="openAcceptedNoDialog">
+            <q-card>
+                <q-card-section>
+                <div class="text-h6">¿Segur@?</div>
+                </q-card-section>
+
+                <q-card-section class="q-pt-none">
+                    <p v-html="acceptedNotMessage"></p>
+                </q-card-section>
+
+                <q-card-actions align="right">
+                    <q-btn flat label="Entendido" color="indigo" @click="openAcceptedNoDialog = false" />
+                </q-card-actions>
+            </q-card>
+        </q-dialog>
 
 </template>
 
@@ -146,7 +161,7 @@
 import { Vue } from 'vue-class-component'
 import { Emit, Prop, Watch } from 'vue-property-decorator'
 import './onboarding-stepper-component.scss'
-import { OptionsModel, GuestFinalInfoModel, GuestItem } from 'components/models'
+import { OptionsModel, GuestFinalInfoModel, UserItem } from 'components/models'
 
 const meatIcon: string = require('../../../assets/meat.png') as string
 const fishIcon: string = require('../../../assets/fish.png') as string
@@ -156,13 +171,15 @@ const busIcon: string = require('../../../assets/bus.png') as string
 const carIcon: string = require('../../../assets/car.png') as string
 
 export default class OnBoardingPage extends Vue {
-    @Prop({ required: false, default: {}, type: Object }) externUser!:GuestItem;
+    @Prop({ required: false, default: {}, type: Object }) externUser!:UserItem;
     @Prop({ required: false, default: 1, type: Number }) externStep!:number;
     @Prop({ required: false, default: false, type: Boolean }) isEditMode!:boolean;
 
     step = 1
 
-    intoleranceOption:string | null = null;
+    intoleranceOption = '';
+
+    openAcceptedNoDialog = false;
 
     guestMenuModel:OptionsModel = {
       label: null,
@@ -178,12 +195,12 @@ export default class OnBoardingPage extends Vue {
       icon: null
     }
 
-    guest:GuestItem = {
-      accepted: false,
-      id: null,
+    guest:UserItem = {
+      accepted: 'waiting',
+      _id: null,
       name: null,
       menu: null,
-      intolerance: null,
+      intolerance: '',
       bus: null
     };
 
@@ -239,7 +256,7 @@ export default class OnBoardingPage extends Vue {
         },
         {
           label: 'No necesito',
-          value: 'no necesito',
+          value: 'ninguno',
           description: 'Calle desde donde saldría',
           category: '3',
           icon: carIcon
@@ -255,11 +272,15 @@ export default class OnBoardingPage extends Vue {
       return !this.guestBusModel.value
     }
 
+    get acceptedNotMessage ():string {
+      return `<p>Nos pone muy tristes que no puedas acudir a la boda, cualquier cambio de opinion siempre podras acceder otra vez y continuar dándole al SI :D<p>`
+    }
+
     @Emit('onboarding-stepper-finished')
     submitStepper ():GuestFinalInfoModel {
       this.step = 5
       return {
-        guest: this.guest,
+        guest: { name: this.guest.name, _id: this.guest._id as string },
         menu: this.guestMenuModel,
         bus: this.guestBusModel,
         intolerance: this.intoleranceOption
@@ -272,11 +293,16 @@ export default class OnBoardingPage extends Vue {
 
     initGuestData ():void {
       this.guest = { ...this.externUser }
-      if (this.guest?.id) {
+      if (this.guest?._id) {
         this.guestMenuModel = this.menuOptions.filter(option => option.value === this.guest.menu)[0]
         this.guestBusModel = this.busOptions.filter(option => option.value === this.guest.bus)[0]
         this.intoleranceOption = this.guest.intolerance ? this.guest.intolerance : this.intoleranceOption
       }
+    }
+
+    acceptedNo () {
+      this.step = 1
+      this.openAcceptedNoDialog = true
     }
 
     created () {

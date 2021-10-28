@@ -1,3 +1,7 @@
+export type Accepted = 'waiting' | 'yes' | 'no';
+export type Menu = 'carne' | 'pescado' | 'vegetariano' | 'vegano';
+export type Bus = 'manoteras' | 'alcazar' | 'ninguno';
+
 export interface Todo {
   id: number;
   content: string;
@@ -22,26 +26,34 @@ export interface CountdownClock {
 }
 
 export interface GuestItem {
-    accepted: boolean,
-    id:string | null,
+    id?: string | null
     name: string | null,
-    intolerance?: string | null,
-    menu: string | null, // aqui molaria un enum
-    bus: string | null,
-    relatives?: Array<GuestItem>
+    intolerance?: string,
+    menu: Menu | null, // aqui molaria un enum
+    bus: Bus | null,
+}
+
+export interface UserItem {
+    accepted: Accepted,
+    _id?:string | null,
+    name: string | null,
+    intolerance?: string,
+    menu: Menu | null, // aqui molaria un enum
+    bus: Bus | null,
+    guests?: Array<GuestItem>
 }
 
 export interface OptionsModel {
     label: string | null,
-    value: string | null,
+    value: Menu | Bus | null,
     description?: string | null,
     category?: string | null,
     icon?: string | null
 }
 
 export interface GuestFinalInfoModel {
-    guest?: GuestItem | null
-    menu:OptionsModel | null,
-    bus:OptionsModel | null,
-    intolerance:string | null
+    guest: { name: string | null, _id:string | null }
+    menu: OptionsModel | null,
+    bus: OptionsModel | null,
+    intolerance:string
 }

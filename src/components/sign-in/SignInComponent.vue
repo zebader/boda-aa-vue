@@ -99,7 +99,7 @@
 <script lang="ts">
 import { Vue } from 'vue-class-component'
 import AuthService from '../../services/AuthService'
-import { AuthRequest } from '../../models/AuthModels'
+import { AuthRequest, AuthResponse } from '../../models/AuthModels'
 import './sign-in-component.scss'
 
 export default class SignInComponent extends Vue {
@@ -107,7 +107,8 @@ export default class SignInComponent extends Vue {
       username: null,
       email: null,
       phone: null,
-      password: null
+      password: null,
+      role: 'user'
     }
 
     get isValidFormData (): boolean {
@@ -137,24 +138,13 @@ export default class SignInComponent extends Vue {
 
     async submitSignInForm () {
       const authService:AuthService = new AuthService()
-      let response:AuthService | null
+      let response:AuthResponse | null
       try {
         response = await authService.createUser(this.signInData)
         console.log('usuario creado,', response)
       } catch (error) {
         console.log('error al crear usuario', error)
       }
-    }
-
-    async mounted () {
-    //   const authService:AuthService = new AuthService()
-    //   let response:AuthService | null
-    //   try {
-    //     response = await authService.me()
-    //     console.log('usuario sesionado,', response)
-    //   } catch (error) {
-    //     console.log('error al sessionar al usuario', error)
-    //   }
     }
 }
 </script>

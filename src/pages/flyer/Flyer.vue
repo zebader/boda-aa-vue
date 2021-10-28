@@ -2,7 +2,7 @@
     <q-page class="page__flyer column items-start justify-start q-pa-md">
         <div class="page__flyer__title-container column justify-center q-pb-lg q-mb-lg">
             <p class="page__flyer__title-container__intro-text">
-                Bienvenido,<br><span>Jesus Cebader Rodriguez</span>
+                Bienvenido,<br><span>{{this.guestName}}</span>
             </p>
         </div>
         <div class="page__flyer__container column justify-start">
@@ -57,9 +57,13 @@ export default class flyerPage extends Vue {
       return this.slide === 1 ? 2000 : 5000
     }
 
+    get guestName () :string {
+      return '$user' in this && this.$user?.username ? this.$user.username : 'Invitado'
+    }
+
     mounted () {
       setTimeout(() => {
-        this.$router.push('/') as Promise<void>
+        this.$router.replace('/') as Promise<void>
       }, 7000)
     }
 }

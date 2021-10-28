@@ -7,7 +7,7 @@ import {
 } from 'vue-router'
 import { StateInterface } from '../store'
 import routes from './routes'
-import AuthService from '../services/AuthService'
+import AuthManager from 'src/lib/AuthManager'
 
 /*
  * If not building with SSR mode, you can
@@ -36,25 +36,58 @@ export default route<StateInterface>(function (/* { store, ssrContext } */) {
   })
 
   Router.beforeEach(async (to, from, next) => {
-    if (to.path === '/signin') {
-      // Abstraer en clase y guardar user en vuex
-      const authService:AuthService = new AuthService()
-      let response:AuthService | null
-      let path
+    if (!AuthManager.getInstance().user) await AuthManager.getInstance().initUser()
+    const user = AuthManager.getInstance().user
+
+    if (to.path === '/') {
       try {
-        response = await authService.me()
-        path = response ? { path: '/welcome' } : { path: '/signin' }
-        console.log('usuario sesionado,', response)
-        if (response) {
-          next({ path: path.path })
+        if (user) {
+          if (user?.guests && user.guests.length === 0) next({ path: '/onboarding' })
+          else next()
+        } else {
+          next({ path: '/signin' })
         }
       } catch (error) {
-        console.log('error al sessionar al usuario', error)
         next()
       }
-    } else {
-      next()
     }
+
+    if (to.path === '/signin' || to.path === '/login') {
+      try {
+        if (user) {
+          if (user?.guests && user.guests.length === 0) next({ path: '/onboarding' })
+          else next({ path: '/' })
+        } else {
+          next()
+        }
+      } catch (error) {
+        next()
+      }
+    }
+    if (to.path === '/onboarding') {
+      try {
+        if (user) {
+          if (user?.guests && user.guests.length > 0) next({ path: '/' })
+        } else {
+          next({ path: '/signin' })
+        }
+      } catch (error) {
+        next()
+      }
+    }
+    if (to.path === '/welcome') {
+      try {
+        if (user) {
+          if (user?.guests && user.guests.length > 0) next({ path: '/' })
+          else next({ path: '/onboarding' })
+        } else {
+          next()
+        }
+      } catch (error) {
+        next()
+      }
+    }
+    next()
   })
 
   return Router

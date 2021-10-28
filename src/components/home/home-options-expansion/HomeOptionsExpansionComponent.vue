@@ -82,22 +82,25 @@ import { Vue, Options } from 'vue-class-component'
 import HomeOptionsCardComponent from 'components/home/home-options-card/HomeOptionsCardComponent.vue'
 import OnBoardingStepperComponent from 'components/onboarding/onboarding-stepper/OnBoardingStepperComponent.vue'
 import './home-options-expansion.scss'
-import { OptionItem, GuestItem, GuestFinalInfoModel } from 'components/models'
+import { OptionItem, UserItem, GuestFinalInfoModel, Menu, Bus } from 'components/models'
+import { GuestResponse } from '../../../models/GuestModels'
+import AuthManager from 'src/lib/AuthManager'
+import GuestService from '../../../services/GuestService'
 
 @Options({
   components: { HomeOptionsCardComponent, OnBoardingStepperComponent }
 })
 export default class HomeOptionsExpansionComponent extends Vue {
-    guestsList:Array<GuestItem> = [];
+    guestsList:Array<GuestResponse> = [];
     openDialog = false;
     maximizedToggle = true;
     openAlertDeleteGuest = false;
 
-    guest:GuestItem = {
-      accepted: false,
-      id: null,
+    guest:UserItem = {
+      accepted: 'waiting',
+      _id: null,
       name: null,
-      intolerance: null,
+      intolerance: '',
       menu: null,
       bus: null
     };
@@ -128,7 +131,7 @@ export default class HomeOptionsExpansionComponent extends Vue {
     }
 
     get dialogTitle ():string {
-      return this.guest?.id && this.guest?.name ? `Editar datos de ${this.guest.name}` : 'Anadir acompañante'
+      return this.guest?._id && this.guest?.name ? `Editar datos de ${this.guest.name}` : 'Anadir acompañante'
     }
 
     get removeGuestMessage () :string {
@@ -139,20 +142,13 @@ export default class HomeOptionsExpansionComponent extends Vue {
       return index < this.optionItems.length - 1
     }
 
-    // TODO remove mocks
-    fetchGuestsList () {
-      const fetchedUser:GuestItem[] = [
-        {
-          accepted: true,
-          id: '1',
-          name: 'Jesus Cebader Rodriguez',
-          intolerance: 'Apio',
-          menu: 'vegetariano', // aqui molaria un enum
-          bus: 'manoteras'
-        }
-      ]
-
-      this.guestsList = [...fetchedUser]
+    setGuestsList () {
+      if ('$user' in this && this.$user?.guests && this.$user.guests.length > 0) this.guestsList = [...this.$user.guests]
+      else if (AuthManager.getInstance().user) {
+        const user = AuthManager.getInstance().user
+        const guests = user?.guests && user.guests.length > 0 ? user.guests : []
+        this.guestsList = [...guests]
+      }
     }
 
     closeFinishDialog () {
@@ -160,24 +156,27 @@ export default class HomeOptionsExpansionComponent extends Vue {
       this.openDialog = false
     }
 
-    searchAndReplaceGuest (guestInfo:GuestFinalInfoModel) {
-      const guestId = guestInfo?.guest?.id && guestInfo.guest.id
-      const index = this.guestsList.map(guest => guest.id).indexOf(guestId as string)
-      this.guestsList.splice(index, 1, {
-        accepted: true,
-        id: String(guestId),
-        name: guestInfo?.guest?.name ? guestInfo.guest.name : '',
+    async searchAndReplaceGuest (guestInfo:GuestFinalInfoModel) {
+      const guestId = guestInfo?.guest?._id && guestInfo.guest._id
+      const index = this.guestsList.map(guest => guest._id).indexOf(guestId as string)
+      const guestInfoToSend = {
+        _id: String(guestId),
+        name: guestInfo?.guest?.name ? guestInfo.guest.name : null,
         intolerance: guestInfo.intolerance,
-        menu: guestInfo.menu?.value ? guestInfo.menu.value : '',
-        bus: guestInfo.bus?.value ? guestInfo.bus.value : ''
-      })
+        menu: guestInfo.menu?.value ? guestInfo.menu.value as Menu : null,
+        bus: guestInfo.bus?.value ? guestInfo.bus.value as Bus : null
+      }
+
+      await this.updateGuest(guestInfoToSend)
+      this.guestsList.splice(index, 1, guestInfoToSend)
     }
 
-    removeGuest () {
-      const guestId = this.guest?.id && this.guest.id
-      const index = this.guestsList.map(guest => guest.id).indexOf(guestId as string)
+    async removeGuest () {
+      const guestId = this.guest?._id && this.guest._id
+      const index = this.guestsList.map(guest => guest._id).indexOf(guestId as string)
       this.guestsList.splice(index, 1)
       this.resetGuestData()
+      await this.deleteGuest(guestId as string)
       this.openAlertDeleteGuest = false
     }
 
@@ -186,46 +185,84 @@ export default class HomeOptionsExpansionComponent extends Vue {
       this.openAlertDeleteGuest = false
     }
 
-    addNewGuest (guestInfo:GuestFinalInfoModel) {
-      this.guestsList.push({
-        accepted: true,
-        id: String(this.guestsList.length + 1),
+    async addNewGuest (guestInfo:GuestFinalInfoModel) {
+      const guestId = guestInfo?.guest?._id && guestInfo.guest._id
+      const guestInfoToSend = {
+        _id: guestId,
         name: guestInfo?.guest?.name ? guestInfo.guest.name : '',
         intolerance: guestInfo.intolerance,
-        menu: guestInfo.menu?.value ? guestInfo.menu.value : '',
-        bus: guestInfo.bus?.value ? guestInfo.bus.value : ''
-      })
+        menu: guestInfo.menu?.value ? guestInfo.menu.value as Menu : null,
+        bus: guestInfo.bus?.value ? guestInfo.bus.value as Bus : null
+      }
+
+      this.guestsList.push(guestInfoToSend)
+      await this.createGuest(guestInfoToSend)
     }
 
     resetGuestData () {
       this.guest = {
-        accepted: false,
-        id: null,
+        accepted: 'waiting',
+        _id: null,
         name: null,
-        intolerance: null,
+        intolerance: '',
         menu: null,
         bus: null
       }
     }
 
-    manageGuestData (guestInfo:GuestFinalInfoModel) {
-      guestInfo?.guest?.id ? this.searchAndReplaceGuest(guestInfo) : this.addNewGuest(guestInfo)
+    async manageGuestData (guestInfo:GuestFinalInfoModel) {
+      guestInfo?.guest?._id ? await this.searchAndReplaceGuest(guestInfo) : await this.addNewGuest(guestInfo)
       this.resetGuestData()
       this.openDialog = false
     }
 
-    updateGuestData (editGuest:GuestItem) {
+    updateGuestData (editGuest:UserItem) {
       this.guest = editGuest
       this.openDialog = true
     }
 
-    updateGuestDataForDelete (editGuest:GuestItem) {
+    updateGuestDataForDelete (editGuest:UserItem) {
       this.guest = editGuest
       this.openAlertDeleteGuest = true
     }
 
+    async updateGuest (guest:GuestResponse) {
+      if (!guest._id) return
+      const { name, menu, bus, intolerance, _id } = guest
+      const guestService:GuestService = new GuestService()
+      try {
+        const response = await guestService.updateGuest(_id, { name, menu, bus, intolerance })
+        console.log('guest actualizado,', response)
+      } catch (error) {
+        console.log('error al actualizar guest', error)
+      }
+    }
+
+    async createGuest (guest:GuestResponse) {
+      if (guest._id) return
+      const { name, menu, bus, intolerance } = guest
+      const guestService:GuestService = new GuestService()
+      try {
+        const response = await guestService.createGuest({ name, menu, bus, intolerance })
+        console.log('guest creado,', response)
+      } catch (error) {
+        console.log('error al crear guest', error)
+      }
+    }
+
+    async deleteGuest (guestId:string) {
+      if (!guestId) return
+      const guestService:GuestService = new GuestService()
+      try {
+        await guestService.deleteGuest(guestId)
+        console.log('guest eliminado')
+      } catch (error) {
+        console.log('error al eliminar guest', error)
+      }
+    }
+
     mounted () {
-      this.fetchGuestsList()
+      this.setGuestsList()
     }
 }
 </script>

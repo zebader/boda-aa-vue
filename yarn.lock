@@ -1042,7 +1042,7 @@
     chalk "4.1.1"
     chokidar "3.5.2"
     ci-info "3.2.0"
-    compression-webpack-plugin "8.0.0"
+    compression-webpack-plugin "5.0.2"
     copy-webpack-plugin "9.0.0"
     cross-spawn "7.0.3"
     css-loader "5.2.6"
@@ -2379,14 +2379,6 @@ compression-webpack-plugin@5.0.2:
     schema-utils "^2.7.0"
     serialize-javascript "^4.0.0"
     webpack-sources "^1.4.3"
-
-compression-webpack-plugin@8.0.0:
-  version "8.0.0"
-  resolved "https://registry.yarnpkg.com/compression-webpack-plugin/-/compression-webpack-plugin-8.0.0.tgz#cea047f9e047020cb267a297898d8d05e9aa29a7"
-  integrity sha512-/pBUx1gV8nL6YPKKa9QRs4xoemU28bfqAu8z5hLy2eTrWog4fU8lQYtlpbYwCWtIfAHLxsgSUHjk9RqK6UL+Yw==
-  dependencies:
-    schema-utils "^3.0.0"
-    serialize-javascript "^5.0.1"
 
 compression@^1.7.4:
   version "1.7.4"

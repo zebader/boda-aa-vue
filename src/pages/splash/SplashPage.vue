@@ -26,7 +26,7 @@
                 appear
                 enter-active-class="animated bounceInUp page__splash__image-animation"
                 leave-active-class="animated bounceInDown page__splash__image-animation">
-                <q-btn unelevated no-caps color="indigo" icon-right="login" label="Entrar" size="lg" class="q-ma-sm full-width"/>
+                <q-btn unelevated no-caps color="indigo" icon-right="login" label="Entrar" size="lg" class="q-ma-sm full-width" to="/signin"/>
             </transition>
             <q-btn flat no-caps color="indigo" label="Más detalles" size="md" class="q-ma-sm full-width" @click="toggleDialog"/>
         </div>
@@ -53,12 +53,9 @@
 </template>
 
 <script lang="ts">
-import { Vue, Options } from 'vue-class-component'
+import { Vue } from 'vue-class-component'
 import './splash.scss'
 
-@Options({
-//   components: { HomeOptionsExpansionComponent, HomeWelcomeCardComponent }
-})
 export default class SplashPage extends Vue {
     showDialog = false
 

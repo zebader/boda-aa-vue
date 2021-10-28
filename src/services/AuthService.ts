@@ -1,16 +1,16 @@
 import Api from '../lib/Api'
-import { AuthRequest } from '../models/AuthModels'
+import { AuthRequest, AuthResponse } from '../models/AuthModels'
 
 export default class AuthService extends Api {
-  async createUser (user:AuthRequest): Promise<AuthService| null> {
-    const { username, password, email, phone, userType } = user
-    const response:AuthService = await this.api.post('/auth/create-user', { username, password, email, phone, userType })
+  async createUser (user:AuthRequest): Promise<AuthResponse> {
+    const { username, password, email, phone, role } = user
+    const response = await this.api.post('/auth/create-user', { username, password, email, phone, role })
 
-    return response
+    return response.data as AuthResponse
   }
 
-  async me (): Promise<AuthService| null> {
-    const me:AuthService = await this.api.get('/auth/me')
-    return me
+  async me (): Promise<AuthResponse| null> {
+    const me = await this.api.get('/auth/me')
+    return me.data as AuthResponse
   }
 }
