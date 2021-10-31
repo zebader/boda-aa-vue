@@ -29,7 +29,7 @@
                             <q-btn
                                 unelevated
                                 no-caps
-                                type="submit"
+                                type="button"
                                 color="indigo"
                                 label="Finalizar y añadir acompañantes"
                                 size="lg"

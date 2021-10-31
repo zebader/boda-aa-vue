@@ -84,7 +84,7 @@
             <q-btn
                 unelevated
                 no-caps
-                type="submit"
+                type="button"
                 color="indigo"
                 label="Registrarse"
                 size="lg"

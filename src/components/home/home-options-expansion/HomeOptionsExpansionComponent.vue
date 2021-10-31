@@ -25,7 +25,7 @@
                                         unelevated
                                         icon="person_add"
                                         no-caps
-                                        type="submit"
+                                        type="button"
                                         color="indigo"
                                         size="lg"
                                         class="q-ma-sm full-width"

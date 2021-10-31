@@ -50,7 +50,7 @@
             <q-btn
                 unelevated
                 no-caps
-                type="submit"
+                type="button"
                 color="indigo"
                 label="Entrar"
                 size="lg"
