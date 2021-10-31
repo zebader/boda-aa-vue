@@ -273,7 +273,7 @@ export default class OnBoardingPage extends Vue {
     }
 
     get acceptedNotMessage ():string {
-      return `<p>Nos pone muy tristes que no puedas acudir a la boda, cualquier cambio de opinion siempre podras acceder otra vez y continuar dándole al SI :D<p>`
+      return '<p>Nos pone muy tristes que no puedas acudir a la boda, cualquier cambio de opinion siempre podras acceder otra vez y continuar dándole al SI :D<p>'
     }
 
     @Emit('onboarding-stepper-finished')
