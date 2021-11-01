@@ -1,4 +1,5 @@
 import { route } from 'quasar/wrappers'
+import { AuthResponse } from 'src/models/AuthModels'
 import {
   createMemoryHistory,
   createRouter,
@@ -7,7 +8,6 @@ import {
 } from 'vue-router'
 import { StateInterface } from '../store'
 import routes from './routes'
-import AuthManager from 'src/lib/AuthManager'
 
 /*
  * If not building with SSR mode, you can
@@ -18,7 +18,7 @@ import AuthManager from 'src/lib/AuthManager'
  * with the Router instance.
  */
 
-export default route<StateInterface>(function (/* { store, ssrContext } */) {
+export default route<StateInterface>(function ({ store/* , ssrContext */ }) {
   const createHistory = process.env.SERVER
     ? createMemoryHistory
     : (process.env.VUE_ROUTER_MODE === 'history' ? createWebHistory : createWebHashHistory)
@@ -36,8 +36,14 @@ export default route<StateInterface>(function (/* { store, ssrContext } */) {
   })
 
   Router.beforeEach(async (to, from, next) => {
-    if (!AuthManager.getInstance().user) await AuthManager.getInstance().initUser()
-    const user = AuthManager.getInstance().user
+    let user: AuthResponse | null = null
+    try {
+      await store.dispatch('wedding/updateUser')
+      user = store.state.wedding.user
+    } catch (error) {
+      console.log('router error dispatch')
+      user = null
+    }
 
     if (to.path === '/') {
       try {

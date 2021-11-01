@@ -142,6 +142,7 @@ export default class SignInComponent extends Vue {
       try {
         response = await authService.createUser(this.signInData)
         console.log('usuario creado,', response)
+        this.$store.commit('wedding/updateShowLogout', true)
         this.$router.replace('/onboarding') as Promise<void>
       } catch (error) {
         console.log('error al crear usuario', error)

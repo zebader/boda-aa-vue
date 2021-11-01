@@ -5,7 +5,7 @@
                 Bienvenido,<br><span>{{this.guestName}}</span>
             </p>
         </div>
-        <OnBoardingStepper @onboarding-stepper-finished="showFinishDialog" :name="guestName" :externStep="step"></OnBoardingStepper>
+        <OnBoardingStepper @onboarding-stepper-finished="showFinishDialog" :externStep="step"></OnBoardingStepper>
         <q-dialog
             v-model="openDialog"
             persistent
@@ -51,8 +51,6 @@ import { GuestFinalInfoModel, Bus, Menu } from 'components/models'
 import OnBoardingStepper from 'src/components/onboarding/onboarding-stepper/OnBoardingStepperComponent.vue'
 import GuestService from '../../services/GuestService'
 import { GuestRequest } from '../../models/GuestModels'
-// import { AuthResponse } from '../../models/AuthModels'
-import AuthManager from 'src/lib/AuthManager'
 
 @Options({
   components: {
@@ -83,11 +81,15 @@ export default class OnBoardingPage extends Vue {
     }
 
     get guestName () :string {
-      return '$user' in this && this.$user?.username ? this.$user.username : 'Invitado'
+      const user = this.$store.state.wedding.user
+      if (user && user?.username && user.username) return user.username
+      else return 'Invitado'
     }
 
     get guestUserId () :string {
-      return '$user' in this && this.$user?.id ? this.$user.id : ''
+      const user = this.$store.state.wedding.user
+      if (user && user?.id && user.id) return user.id
+      else return ''
     }
 
     showFinishDialog (guestInfo:GuestFinalInfoModel) {
@@ -110,9 +112,7 @@ export default class OnBoardingPage extends Vue {
       }
       const guestService:GuestService = new GuestService()
       try {
-        const response = await guestService.createGuest(dataToSubmit)
-        this.$user = response
-        AuthManager.getInstance().user = this.$user
+        await guestService.createGuest(dataToSubmit)
 
         this.$router.replace('/flyer') as Promise<void>
       } catch (error) {

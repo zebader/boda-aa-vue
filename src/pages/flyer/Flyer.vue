@@ -58,7 +58,9 @@ export default class flyerPage extends Vue {
     }
 
     get guestName () :string {
-      return '$user' in this && this.$user?.username ? this.$user.username : 'Invitado'
+      const user = this.$store.state.wedding.user
+      if (user && user?.username && user.username) return user.username
+      else return 'Invitado'
     }
 
     mounted () {

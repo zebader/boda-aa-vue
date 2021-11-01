@@ -55,6 +55,7 @@
                 label="Entrar"
                 size="lg"
                 :disabled="!isValidFormData"
+                 @click="submitLogInForm"
                 class="q-ma-sm full-width"/>
         <q-btn flat no-caps color="indigo" label="No tengo cuenta, Registrarse" size="md" class="q-ma-sm full-width" to="/signin"/>
         </div>
@@ -64,16 +65,15 @@
 <script lang="ts">
 import { Vue } from 'vue-class-component'
 import './log-in-component.scss'
-
-export type LogInData = {
-    email: string | null,
-    password: string | null
-}
+import AuthService from '../../services/AuthService'
+import { AuthRequest, AuthResponse } from '../../models/AuthModels'
 
 export default class LogInComponent extends Vue {
-    loginData:LogInData = {
+    loginData:AuthRequest = {
       email: null,
-      password: null
+      password: null,
+      username: null,
+      phone: null
     }
 
     isEmailSucces (val: string | null): boolean[] {
@@ -89,6 +89,22 @@ export default class LogInComponent extends Vue {
         this.isEmailSucces(this.loginData.email)[0] &&
         this.isPasswordSucces(this.loginData.password)[0]
       )
+    }
+
+    async submitLogInForm () {
+      const authService:AuthService = new AuthService()
+      let response:AuthResponse | null
+      try {
+        response = await authService.login(this.loginData)
+        console.log('usuario logueado,', response)
+
+        await this.$store.dispatch('wedding/updateUser')
+
+        this.$store.commit('wedding/updateShowLogout', true)
+        this.$router.replace('/onboarding') as Promise<void>
+      } catch (error) {
+        console.log('error al loguear usuario', error)
+      }
     }
 }
 </script>

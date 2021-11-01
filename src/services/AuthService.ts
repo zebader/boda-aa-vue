@@ -9,8 +9,19 @@ export default class AuthService extends Api {
     return response.data as AuthResponse
   }
 
+  async login (user:AuthRequest): Promise<AuthResponse> {
+    const { password, email } = user
+    const response = await this.api.post('/auth/login', { password, email })
+
+    return response.data as AuthResponse
+  }
+
   async me (): Promise<AuthResponse| null> {
     const me = await this.api.get('/auth/me')
     return me.data as AuthResponse
+  }
+
+  async logout (): Promise< void> {
+    await this.api.post('/auth/logout')
   }
 }

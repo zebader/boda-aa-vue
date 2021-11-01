@@ -3,12 +3,12 @@
 </template>
 <script lang="ts">
 import { Vue } from 'vue-class-component'
-import AuthManager from 'src/lib/AuthManager'
 
 export default class App extends Vue {
   async mounted () {
     try {
-      await AuthManager.getInstance().initUser()
+      await this.$store.dispatch('wedding/updateUser')
+      if (this.$store.state.wedding.user) this.$store.commit('wedding/updateShowLogout', true)
     } catch (error) {
       console.log('App init User me error', error)
     }

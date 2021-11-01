@@ -84,7 +84,6 @@ import OnBoardingStepperComponent from 'components/onboarding/onboarding-stepper
 import './home-options-expansion.scss'
 import { OptionItem, UserItem, GuestFinalInfoModel, Menu, Bus } from 'components/models'
 import { GuestResponse } from '../../../models/GuestModels'
-import AuthManager from 'src/lib/AuthManager'
 import GuestService from '../../../services/GuestService'
 
 @Options({
@@ -143,12 +142,8 @@ export default class HomeOptionsExpansionComponent extends Vue {
     }
 
     setGuestsList () {
-      if ('$user' in this && this.$user?.guests && this.$user.guests.length > 0) this.guestsList = [...this.$user.guests]
-      else if (AuthManager.getInstance().user) {
-        const user = AuthManager.getInstance().user
-        const guests = user?.guests && user.guests.length > 0 ? user.guests : []
-        this.guestsList = [...guests]
-      }
+      const user = this.$store.state.wedding.user
+      if (user && user?.guests && user.guests.length > 0) this.guestsList = [...user.guests]
     }
 
     closeFinishDialog () {
