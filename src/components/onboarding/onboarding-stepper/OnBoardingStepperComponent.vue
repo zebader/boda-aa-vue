@@ -227,7 +227,6 @@ export default class OnBoardingPage extends Vue {
     @Watch('externStep')
     updateStep (newValue: number) {
       this.step = newValue
-      debugger
     }
 
     get menuOptions ():OptionsModel[] {
