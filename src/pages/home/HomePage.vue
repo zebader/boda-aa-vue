@@ -1,5 +1,14 @@
 <template>
   <q-page class="page__home column items-center justify-start">
+              <div class="page__home__title-container column justify-center q-mb-lg">
+            <p class="page__home__title-container__title q-mb-none">
+                Preferencias
+            </p>
+            <p class="page__home__title-container__subtitle q-mb-none">
+                Añade acompañantes y edita preferencias
+            </p>
+
+        </div>
     <HomeOptionsExpansionComponent></HomeOptionsExpansionComponent>
   </q-page>
 </template>
@@ -13,5 +22,11 @@ import './home.scss'
 @Options({
   components: { HomeOptionsExpansionComponent, HomeWelcomeCardComponent }
 })
-export default class HomePage extends Vue {}
+export default class HomePage extends Vue {
+  get guestName () :string {
+    const user = this.$store.state.wedding.user
+    if (user && user?.username && user.username) return user.username
+    else return 'Invitado'
+  }
+}
 </script>

@@ -1,3 +1,5 @@
+import { GuestResponse } from './GuestModels'
+
 export interface AuthRequest {
     username:string | null,
     password:string | null,
@@ -11,5 +13,5 @@ export interface AuthResponse {
     id:string | null,
     email:string | null,
     role:string | null,
-    guests: []
+    guests: GuestResponse[]
 }

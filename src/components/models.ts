@@ -1,6 +1,6 @@
 export type Accepted = 'waiting' | 'yes' | 'no';
-export type Menu = 'carne' | 'pescado' | 'vegetariano' | 'vegano';
-export type Bus = 'manoteras' | 'alcazar' | 'ninguno';
+export type Menu = 'animal' | 'vegetariano' | 'vegano';
+export type Bus = 'alcazar' | 'ninguno';
 
 export interface Todo {
   id: number;

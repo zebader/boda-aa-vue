@@ -33,6 +33,8 @@
                                 color="indigo"
                                 label="Finalizar y añadir acompañantes"
                                 size="lg"
+                                :disabled="submitButtonDisabled"
+                                :loading="submitButtonDisabled"
                                 class="q-ma-sm full-width"
                                 @click="submitGuestData"/>
                             <q-btn flat no-caps color="indigo" label="Atrás, revisar datos" size="md" class="q-ma-sm full-width" @click="closeFinishDialog"/>
@@ -49,7 +51,6 @@ import { Vue, Options } from 'vue-class-component'
 import './onboarding.scss'
 import { GuestFinalInfoModel, Bus, Menu } from 'components/models'
 import OnBoardingStepper from 'src/components/onboarding/onboarding-stepper/OnBoardingStepperComponent.vue'
-import GuestService from '../../services/GuestService'
 import { GuestRequest } from '../../models/GuestModels'
 
 @Options({
@@ -64,6 +65,8 @@ export default class OnBoardingPage extends Vue {
 
     maximizedToggle = true
 
+    submitButtonDisabled = false
+
     guestFinalInfo:GuestFinalInfoModel = {
       guest: { name: null, _id: null },
       menu: null,
@@ -75,8 +78,8 @@ export default class OnBoardingPage extends Vue {
       return `
             Mi nombre es <span>${this.guestName}</span>, confirmo que <span>asistire</span> a la boda y que:<br><br>
             Elijo el menú de <span>${this.guestFinalInfo?.menu?.label ? this.guestFinalInfo.menu.label : ''}</span>,<br>
-            <span>${this.guestFinalInfo.intolerance ? 'Si tengo intolerancias, a ' + this.guestFinalInfo.intolerance : 'No tengo intolerancias'}</span><br>
-            y ${this.guestFinalInfo?.bus?.category === '3' ? '<span>no necesito transporte</span>' : `Necesito transporte desde <span>${this.guestFinalInfo?.bus?.label ? this.guestFinalInfo.bus.label : ''}</span>`}
+            <span>${this.guestFinalInfo.intolerance ? 'Si sufro intolerancias u otros : ' + this.guestFinalInfo.intolerance : 'No sufro intolerancias u otros'}</span><br>
+            y ${this.guestFinalInfo?.bus?.category === '2' ? '<span>no necesito transporte</span>' : `Necesito transporte desde <span>${this.guestFinalInfo?.bus?.label ? this.guestFinalInfo.bus.label : ''}</span>`}
         `
     }
 
@@ -103,6 +106,7 @@ export default class OnBoardingPage extends Vue {
     }
 
     async submitGuestData () {
+      this.submitButtonDisabled = true
       const dataToSubmit:GuestRequest = {
         name: this.guestName,
         menu: this.guestFinalInfo?.menu?.value ? this.guestFinalInfo.menu.value as Menu : null,
@@ -110,13 +114,12 @@ export default class OnBoardingPage extends Vue {
         intolerance: this.guestFinalInfo?.intolerance ? this.guestFinalInfo.intolerance : ''
 
       }
-      const guestService:GuestService = new GuestService()
       try {
-        await guestService.createGuest(dataToSubmit)
+        await this.$store.dispatch('wedding/createGuest', dataToSubmit)
 
         this.$router.replace('/flyer') as Promise<void>
       } catch (error) {
-        console.log('error al crear guest de usuario', error)
+        console.log(error)
       }
     }
 

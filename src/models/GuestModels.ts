@@ -1,4 +1,5 @@
 import { Bus, Menu } from '../components/models'
+import { AuthResponse } from './AuthModels'
 
 export interface GuestRequest {
     name:string | null,
@@ -12,5 +13,6 @@ export interface GuestResponse {
     name:string | null,
     menu:Menu | null,
     bus:Bus | null,
-    intolerance :string
+    intolerance :string,
+    user?: AuthResponse[]
 }

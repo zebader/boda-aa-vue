@@ -1,13 +1,12 @@
 import Api from '../lib/Api'
 import { GuestRequest, GuestResponse } from '../models/GuestModels'
-import { AuthResponse } from '../models/AuthModels'
 
 export default class GuestService extends Api {
-  async createGuest (guest:GuestRequest): Promise<AuthResponse> {
+  async createGuest (guest:GuestRequest): Promise<GuestResponse> {
     const { name, menu, bus, intolerance } = guest
     const response = await this.api.post('/api/guest/create-guest', { name, menu, bus, intolerance })
 
-    return response.data as AuthResponse
+    return response.data as GuestResponse
   }
 
   async updateGuest (id:string, guest:GuestRequest): Promise<GuestResponse | []> {

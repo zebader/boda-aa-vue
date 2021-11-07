@@ -5,7 +5,7 @@ const routes: RouteRecordRaw[] = [
     path: '/',
     component: () => import('layouts/HeaderLayout.vue'),
     props: {
-      isCentered: true
+      isCounter: true
     },
     children: [{ path: '', component: () => import('src/pages/home/HomePage.vue') }]
   },

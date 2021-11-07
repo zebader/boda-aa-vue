@@ -1,5 +1,4 @@
 import { route } from 'quasar/wrappers'
-import { AuthResponse } from 'src/models/AuthModels'
 import {
   createMemoryHistory,
   createRouter,
@@ -35,65 +34,17 @@ export default route<StateInterface>(function ({ store/* , ssrContext */ }) {
     )
   })
 
-  Router.beforeEach(async (to, from, next) => {
-    let user: AuthResponse | null = null
-    try {
-      await store.dispatch('wedding/updateUser')
-      user = store.state.wedding.user
-    } catch (error) {
-      console.log('router error dispatch')
-      user = null
-    }
+  Router.beforeEach((to, from, next) => {
+    const user = store.state.wedding.user
+    const protectedRoutes = ['/onboarding', '/']
 
-    if (to.path === '/') {
-      try {
-        if (user) {
-          if (user?.guests && user.guests.length === 0) next({ path: '/onboarding' })
-          else next()
-        } else {
-          next({ path: '/signin' })
-        }
-      } catch (error) {
-        next()
-      }
-    }
-
-    if (to.path === '/signin' || to.path === '/login') {
-      try {
-        if (user) {
-          if (user?.guests && user.guests.length === 0) next({ path: '/onboarding' })
-          else next({ path: '/' })
-        } else {
-          next()
-        }
-      } catch (error) {
-        next()
-      }
-    }
-    if (to.path === '/onboarding') {
-      try {
-        if (user) {
-          if (user?.guests && user.guests.length > 0) next({ path: '/' })
-        } else {
-          next({ path: '/signin' })
-        }
-      } catch (error) {
-        next()
-      }
-    }
-    if (to.path === '/welcome') {
-      try {
-        if (user) {
-          if (user?.guests && user.guests.length > 0) next({ path: '/' })
-          else next({ path: '/onboarding' })
-        } else {
-          next()
-        }
-      } catch (error) {
-        next()
-      }
-    }
-    next()
+    if (protectedRoutes.includes(to.path)) {
+      if (!user) next({ path: '/signin' })
+      else if (to.path === '/onboarding' && user?.guests && user.guests.length > 0) { next({ path: '/' }) } else next()
+    } else if (to.path === '/signin' || to.path === '/login') {
+      if (user) next({ path: '/' })
+      else next()
+    } else next()
   })
 
   return Router

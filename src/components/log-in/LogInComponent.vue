@@ -65,8 +65,7 @@
 <script lang="ts">
 import { Vue } from 'vue-class-component'
 import './log-in-component.scss'
-import AuthService from '../../services/AuthService'
-import { AuthRequest, AuthResponse } from '../../models/AuthModels'
+import { AuthRequest } from '../../models/AuthModels'
 
 export default class LogInComponent extends Vue {
     loginData:AuthRequest = {
@@ -92,18 +91,12 @@ export default class LogInComponent extends Vue {
     }
 
     async submitLogInForm () {
-      const authService:AuthService = new AuthService()
-      let response:AuthResponse | null
       try {
-        response = await authService.login(this.loginData)
-        console.log('usuario logueado,', response)
+        await this.$store.dispatch('wedding/loginUser', this.loginData)
 
-        await this.$store.dispatch('wedding/updateUser')
-
-        this.$store.commit('wedding/updateShowLogout', true)
         this.$router.replace('/onboarding') as Promise<void>
       } catch (error) {
-        console.log('error al loguear usuario', error)
+        console.log(error)
       }
     }
 }

@@ -1,9 +1,10 @@
 <template>
     <q-layout view="hHh Lpr fFf" class="layout__main layout__main--marble">
-            <Header :isAround="true" :isCentered="isCentered"></Header>
-            <q-page-container>
+            <Header :isAround="true" :isCounter="isCounter"></Header>
+            <q-page-container class="q-pt-none">
                 <router-view />
             </q-page-container>
+            <Footer></Footer>
     </q-layout>
 </template>
 
@@ -18,6 +19,6 @@ import Footer from 'src/components/footer/FooterComponent.vue'
   components: { Header, Footer }
 })
 export default class MainLayout extends Vue {
-    @Prop({ required: false, default: false, type: Boolean }) isCentered!:boolean;
+    @Prop({ required: false, default: false, type: Boolean }) isCounter!:boolean;
 }
 </script>

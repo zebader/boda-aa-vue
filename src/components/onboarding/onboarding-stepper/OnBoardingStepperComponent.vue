@@ -42,7 +42,7 @@
                 title="¿Podras asistir a la boda?"
                 prefix="1"
                 :done="step > 1" v-if="!isEditMode">
-                <p >La boda se celebrará el 18 de Abril de 2022 en Alcazar ...,
+                <p >La boda se celebrará el 30 de Abril de 2022 en Alcazar de San Juan...,
                 Recuerda que hay transporte a tu disposición y descuentos en estancias</p>
 
                 <q-stepper-navigation>
@@ -73,7 +73,7 @@
                         v-bind="scope.itemProps"
                         >
                         <q-item-section avatar>
-                            <img width="40" class="q-mr-sm" :src="scope.opt.icon">
+                            <img width="30" class="q-mr-sm" :src="scope.opt.icon">
                         </q-item-section>
                         <q-item-section>
                             <q-item-label v-html="scope.opt.label" />
@@ -89,28 +89,45 @@
             </q-step>
             <q-step
                 :name="3"
-                title="¿Tienes alguna intolerancia?"
+                title="¿Sufres alguna intolerancia o similar?"
                 prefix="3"
                 :done="step > 3">
-                <p>Si tienes alguna intolerancia indicanos cual sino, continua:</p>
-                    <q-input
-                    v-model="intoleranceOption"
-                    filled
-                    color="indigo"
-                    class="q-mt-md"
-                    autogrow/>
+                    <q-btn @click="manageIntoleranceInput('yes')" color="indigo" label="Si" />
+                    <q-btn @click="manageIntoleranceInput('no')" color="indigo" label="No" class="q-ml-sm" />
+                    <q-btn flat
+                        @click="() => {
+                            step = 2
+                            intoleranceInputDisabled = true
+                            } "
+                            color="indigo" label="Atrás" class="q-ml-sm" v-if="intoleranceInputDisabled"/>
+                    <div v-show="!intoleranceInputDisabled" class="q-mt-md">
+                        <p>Danos mas informacion y nos adaptaremos a tus necesidades:</p>
 
-                <q-stepper-navigation>
-                    <q-btn @click="step = 4" color="indigo" label="Continuar" />
-                    <q-btn flat @click="step = 2" color="indigo" label="Atrás" class="q-ml-sm" />
-                </q-stepper-navigation>
+                        <q-input
+                            v-model="intoleranceOption"
+                            filled
+                            color="indigo"
+                            class="q-mt-md"
+                            :rules="[val => !!val || 'Recuerda rellenar este campo']"
+                            autogrow/>
+
+                        <q-stepper-navigation>
+                            <q-btn @click="step = 4" color="indigo" label="Continuar" :disabled="!intoleranceOption"/>
+                            <q-btn flat
+                            @click="() => {
+                                step = 2
+                                intoleranceInputDisabled = true
+                                } "
+                                color="indigo" label="Atrás" class="q-ml-sm" />
+                        </q-stepper-navigation>
+                    </div>
             </q-step>
             <q-step
                 :name="4"
                 title="¿Necesitas transporte?"
                 prefix="4"
                 :done="step > 4">
-                <p>Te ofrecemos la posibilidad de elegir la lanzaderaque te venga mejor gratuitamente.</p>
+                <p>Ponemos un autobus gratuito para ir a la finca</p>
                     <q-select
                         filled
                         color="indigo"
@@ -128,6 +145,7 @@
                         </q-item-section>
                         <q-item-section>
                             <q-item-label v-html="scope.opt.label" />
+                             <q-item-label v-if="scope.opt.description" caption v-html="scope.opt.description"></q-item-label>
                         </q-item-section>
                     </q-item>
                     </template>
@@ -163,8 +181,8 @@ import { Emit, Prop, Watch } from 'vue-property-decorator'
 import './onboarding-stepper-component.scss'
 import { OptionsModel, GuestFinalInfoModel, UserItem } from 'components/models'
 
-const meatIcon: string = require('../../../assets/meat.png') as string
-const fishIcon: string = require('../../../assets/fish.png') as string
+// const meatIcon: string = require('../../../assets/meat.png') as string
+const fishIcon: string = require('../../../assets/fishmeat.png') as string
 const veggiIcon: string = require('../../../assets/veggi.png') as string
 const veganIcon: string = require('../../../assets/vegan.png') as string
 const busIcon: string = require('../../../assets/bus.png') as string
@@ -180,6 +198,8 @@ export default class OnBoardingPage extends Vue {
     intoleranceOption = '';
 
     openAcceptedNoDialog = false;
+
+    intoleranceInputDisabled = true
 
     guestMenuModel:OptionsModel = {
       label: null,
@@ -207,26 +227,27 @@ export default class OnBoardingPage extends Vue {
     @Watch('externStep')
     updateStep (newValue: number) {
       this.step = newValue
+      debugger
     }
 
     get menuOptions ():OptionsModel[] {
       return [
-        {
+        /*         {
           label: 'Carne',
           value: 'carne',
           category: '1',
           icon: meatIcon
-        },
+        }, */
         {
-          label: 'Pescado',
-          value: 'pescado',
-          category: '2',
+          label: 'Carne y Pescado',
+          value: 'animal',
+          category: '1',
           icon: fishIcon
         },
         {
           label: 'Vegetariano',
           value: 'vegetariano',
-          category: '3',
+          category: '2',
           icon: veggiIcon
         },
         {
@@ -240,25 +261,25 @@ export default class OnBoardingPage extends Vue {
 
     get busOptions ():OptionsModel[] {
       return [
-        {
+        /*         {
           label: 'Manoteras',
           value: 'manoteras',
           description: 'Podrás consular mas datos cuando termines',
           category: '1',
           icon: busIcon
-        },
+        }, */
         {
           label: 'Alcazar de San Juan',
           value: 'alcazar',
-          description: 'Calle desde donde saldría',
-          category: '2',
+          description: 'Salida: Plaza toros Alcazar -> Finca (ida y vuelta)',
+          category: '1',
           icon: busIcon
         },
         {
           label: 'No necesito',
           value: 'ninguno',
-          description: 'Calle desde donde saldría',
-          category: '3',
+          description: '',
+          category: '2',
           icon: carIcon
         }
       ]
@@ -278,7 +299,6 @@ export default class OnBoardingPage extends Vue {
 
     @Emit('onboarding-stepper-finished')
     submitStepper ():GuestFinalInfoModel {
-      this.step = 5
       return {
         guest: { name: this.guest.name, _id: this.guest._id as string },
         menu: this.guestMenuModel,
@@ -297,6 +317,16 @@ export default class OnBoardingPage extends Vue {
         this.guestMenuModel = this.menuOptions.filter(option => option.value === this.guest.menu)[0]
         this.guestBusModel = this.busOptions.filter(option => option.value === this.guest.bus)[0]
         this.intoleranceOption = this.guest.intolerance ? this.guest.intolerance : this.intoleranceOption
+      }
+    }
+
+    manageIntoleranceInput (answer:'yes' | 'no') {
+      if (answer === 'yes') {
+        this.intoleranceInputDisabled = false
+      } else {
+        this.intoleranceInputDisabled = true
+        this.intoleranceOption = ''
+        this.step = 4
       }
     }
 
