@@ -15,7 +15,7 @@
                         </p>
                         <div class="row no-wrap justify-center items-center">
                             <q-icon name="payments" color="white" size="sm"/>
-                            <h6 class="text-center q-ma-none text-bold text-white q-mx-sm"> 1465 0100 72 2030876292</h6>
+                            <h6 class="text-center q-ma-none text-bold text-white q-mx-sm">ES05 1465 0100 9317 3539 3377</h6>
                         </div>
                     </div>
 
@@ -45,7 +45,7 @@ export default class FooterComponent extends Vue {
   }
 
   get showMenu ():boolean {
-    return !this.routeMenuBlackList.includes(this.$router.currentRoute.value.path)
+    return !this.routeMenuBlackList.includes(this.$router.currentRoute.value.path) && this.showLogout
   }
 
   async doLogout () {

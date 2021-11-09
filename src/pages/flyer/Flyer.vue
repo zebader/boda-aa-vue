@@ -17,8 +17,21 @@
         <div class="page__flyer__container column justify-center items-center q-my-md">
             <q-spinner-facebook color="indigo" size="3em"></q-spinner-facebook>
         </div>
-        <div class="page__flyer__container column justify-center items-center">
-            <q-carousel
+        <div class="page__flyer__container column justify-center items-center text-center">
+            <div>
+                <q-icon name="redeem" class="q-mb-lg q-mt-none" color="indigo" size="5em"></q-icon>
+                <p class="page__flyer__container__carousel-text">
+                    Hay momentos en la vida que son especiales por si solos, compartirlos con las personas que quieres los convierte en inolvidables.
+                </p>
+                <p class="page__flyer__container__carousel-text">
+                    Nuestro enlace será el comienzo de un nuevo viaje juntos, si queréis contribuir al comienzo de nuestra historia os facilitamos un número de cuenta
+                </p>
+                <h5 class="q-ma-none text-bold">ES05 1465 0100 9317 3539 3377</h5>
+                <p class="page__flyer__container__carousel-text">
+                    Si, os resultara más cómodo, podéis también podéis utilizar Bizum.
+                </p>
+            </div>
+<!--             <q-carousel
                 animated
                 v-model="slide"
                 swipeable
@@ -36,10 +49,18 @@
                 </q-carousel-slide>
                 <q-carousel-slide :name="2" class="column justify-start items-center text-center">
                     <q-icon name="redeem" class="q-mb-lg q-mt-none" color="indigo" size="5em"></q-icon>
-                    <p class="page__flyer__container__carousel-text"> <span>Ayudanos</span> a empezar esta nueva aventura haciendo un ingreso en nuestra cuenta común:</p>
-                    <h5 class="q-ma-none text-bold"> 1465 0100 72 2030876292</h5>
+                    <p class="page__flyer__container__carousel-text">
+                        Hay momentos en la vida que son especiales por si solos, compartirlos con las personas que quieres los convierte en inolvidables.
+                    </p>
+                    <p class="page__flyer__container__carousel-text">
+                        Nuestro enlace será el comienzo de un nuevo viaje juntos, si queréis contribuir al comienzo de nuestra historia os facilitamos un número de cuenta
+                    </p>
+                    <h5 class="q-ma-none text-bold">ES05 1465 0100 9317 3539 3377</h5>
+                    <p class="page__flyer__container__carousel-text">
+                        Si, os resultara más cómodo, podéis también podéis utilizar Bizum.
+                    </p>
                 </q-carousel-slide>
-            </q-carousel>
+            </q-carousel> -->
         </div>
 
     </q-page>

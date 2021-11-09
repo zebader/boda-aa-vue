@@ -36,7 +36,7 @@ export default route<StateInterface>(function ({ store/* , ssrContext */ }) {
 
   Router.beforeEach((to, from, next) => {
     const user = store.state.wedding.user
-    const protectedRoutes = ['/onboarding', '/']
+    const protectedRoutes = ['/onboarding', '/', '/flyer']
 
     if (protectedRoutes.includes(to.path)) {
       if (!user) next({ path: '/signin' })

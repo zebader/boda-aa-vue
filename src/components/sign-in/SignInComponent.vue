@@ -83,6 +83,10 @@
             </q-input>
         </div>
         <div class="component__sign-in__form__section column justify-end">
+                <div class="row items-center">
+                    <q-checkbox v-model="terms" color="indigo"/>
+                    <p class="q-ma-none">Aceptar <span class="text-indigo component__sign-in__form__section__terms" @click="openTermsDialog = true">terminos y condiciones de datos</span></p>
+                </div>
             <q-btn
                 unelevated
                 no-caps
@@ -98,6 +102,26 @@
                 <q-btn flat no-caps color="indigo" label="Ya tengo cuenta, Loguearse" size="md" class="q-ma-sm full-width" to="/login"/>
         </div>
     </q-form>
+    <q-dialog v-model="openTermsDialog">
+      <q-card>
+        <q-card-section>
+          <div class="text-h6">Términos y condiciones Protección de Datos</div>
+        </q-card-section>
+
+        <q-card-section class="q-pt-none">
+            <p>
+                Le informamos que, de conformidad con la normativa sobre protección de datos, sus datos serán objeto de tratamiento por los administradores de esta web como Responsables de los mismos con la finalidad de gestionar los datos facilitados para la organización del enlace. Contamos con su consentimiento para el tratamiento de los datos que nos ha facilitado, de forma voluntaria, libre e informada a los efectos ya mencionados. Podrá ejercer sus derechos de acceso, rectificación, supresión, oposición, limitación al tratamiento, portabilidad, transparencia en la información y a no ser objeto de decisiones individualizadas automatizadas, comunicándolo por escrito.
+            </p>
+            <p>
+                Todos los datos facilitados de carácter personal serán eliminados en el plazo de 6 meses (una vez celebrado el enlace).
+            </p>
+        </q-card-section>
+
+        <q-card-actions align="right">
+          <q-btn unelevated label="Cerrar" color="indigo" v-close-popup />
+        </q-card-actions>
+      </q-card>
+    </q-dialog>
 </template>
 
 <script lang="ts">
@@ -116,12 +140,17 @@ export default class SignInComponent extends Vue {
 
     submitButtonDisabled = false
 
+    terms = false
+
+    openTermsDialog = false
+
     get isValidFormData (): boolean {
       return (
         this.isEmailSucces(this.signInData.email)[0] &&
         this.isNameSucces(this.signInData.username)[0] &&
         // this.isPhoneSucces(this.signInData.phone)[0] &&
-        this.isPasswordSucces(this.signInData.password)[0]
+        this.isPasswordSucces(this.signInData.password)[0] &&
+        this.terms
       )
     }
 

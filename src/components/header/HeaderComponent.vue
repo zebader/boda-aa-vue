@@ -1,5 +1,5 @@
 <template>
-    <q-header unelevated v-if="isAround" class="bg-transparent">
+    <q-header unelevated v-if="isAround" class="bg-transparent" style="position:absolute;">
         <q-toolbar class="q-pa-md">
             <div class="row">
                 <q-img src="~assets/logo-boda-aa.png" width="40px" height="40px"/>

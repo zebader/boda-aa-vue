@@ -25,11 +25,8 @@
             }
         }
         &__carousel-text {
-            color: $secondary;
-            & span {
-                color: $indigo;
-            }
-            font-size: 18px;
+            color: $indigo;
+            font-size: 14px;
         }
     }
     &__animation {
