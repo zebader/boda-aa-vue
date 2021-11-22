@@ -175,11 +175,12 @@ export default class SignInComponent extends Vue {
 
       try {
         await this.$store.dispatch('wedding/createUser', this.signInData)
-
-        this.$router.push('/onboarding') as Promise<void>
+        if (this.$store.state.wedding.user) this.$router.push('/onboarding') as Promise<void>
       } catch (error) {
         console.log(error)
       }
+
+      this.submitButtonDisabled = false
     }
 }
 </script>

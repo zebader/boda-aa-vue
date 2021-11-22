@@ -1,14 +1,14 @@
 <template>
-    <q-header unelevated v-if="isAround" class="bg-transparent" style="position:absolute;">
-        <q-toolbar class="q-pa-md">
+    <q-header unelevated v-if="isAround" class="bg-transparent component__header row justify-center">
+        <q-toolbar class="component__header__toolbar q-pa-md ">
             <div class="row">
                 <q-img src="~assets/logo-boda-aa.png" width="40px" height="40px"/>
             </div>
             <q-toolbar-title></q-toolbar-title>
             <div class="row">
                 <div>
-                    <p class="component__header__title text-right">Adrián y Ángela</p>
-                    <p class="component__header__subtitle text-right" v-if="!isCounter">30 de Abril de 2022</p>
+                    <p class="component__header__toolbar__title text-right">Adrián y Ángela</p>
+                    <p class="component__header__toolbar__subtitle text-right" v-if="!isCounter">30 de Abril de 2022</p>
                     <Countdown v-if="isCounter" :date="officialDate"></Countdown>
                 </div>
 

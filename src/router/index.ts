@@ -36,12 +36,12 @@ export default route<StateInterface>(function ({ store/* , ssrContext */ }) {
 
   Router.beforeEach((to, from, next) => {
     const user = store.state.wedding.user
-    const protectedRoutes = ['/onboarding', '/', '/flyer']
+    const protectedRoutes = ['/onboarding', '/', '/flyer', '/hoteles', '/info']
 
     if (protectedRoutes.includes(to.path)) {
       if (!user) next({ path: '/signin' })
       else if (to.path === '/onboarding' && user?.guests && user.guests.length > 0) { next({ path: '/' }) } else next()
-    } else if (to.path === '/signin' || to.path === '/login') {
+    } else if (to.path === '/signin' || to.path === '/login' || to.path === '/forgot' || to.path === '/reset-password/:id') {
       if (user) next({ path: '/' })
       else next()
     } else next()

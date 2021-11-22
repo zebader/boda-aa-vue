@@ -1,5 +1,6 @@
 <template>
     <q-form
+        ref="myForm"
         class="row items-stretch justify-evenly component__log-in__form"
         autocorrect="off"
         autocapitalize="off"
@@ -45,6 +46,7 @@
                     <q-icon name="check" color="green" />
                 </template>
             </q-input>
+            <q-btn flat no-caps color="indigo" label="Olvide mi contraseña" size="md" class="q-ma-sm full-width" to="/forgot"/>
         </div>
         <div class="component__log-in__form__section column justify-end">
             <q-btn
@@ -93,8 +95,7 @@ export default class LogInComponent extends Vue {
     async submitLogInForm () {
       try {
         await this.$store.dispatch('wedding/loginUser', this.loginData)
-
-        this.$router.replace('/onboarding') as Promise<void>
+        if (this.$store.state.wedding.user) this.$router.push('/onboarding') as Promise<void>
       } catch (error) {
         console.log(error)
       }

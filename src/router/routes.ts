@@ -22,6 +22,20 @@ const routes: RouteRecordRaw[] = [
     ]
   },
   {
+    path: '/forgot',
+    component: () => import('layouts/HeaderLayout.vue'),
+    children: [
+      { path: '', component: () => import('src/pages/forgot/ForgotPage.vue') }
+    ]
+  },
+  {
+    path: '/reset-password/:id',
+    component: () => import('layouts/HeaderLayout.vue'),
+    children: [
+      { path: '', component: () => import('src/pages/reset-password/ResetPasswordPage.vue') }
+    ]
+  },
+  {
     path: '/signin',
     component: () => import('layouts/HeaderLayout.vue'),
     children: [
@@ -43,6 +57,22 @@ const routes: RouteRecordRaw[] = [
     path: '/flyer',
     component: () => import('layouts/HeaderLayout.vue'),
     children: [{ path: '', component: () => import('src/pages/flyer/Flyer.vue') }]
+  },
+  {
+    path: '/hoteles',
+    component: () => import('layouts/HeaderLayout.vue'),
+    props: {
+      isCounter: true
+    },
+    children: [{ path: '', component: () => import('src/pages/hotels/HotelsPage.vue') }]
+  },
+  {
+    path: '/info',
+    component: () => import('layouts/HeaderLayout.vue'),
+    props: {
+      isCounter: true
+    },
+    children: [{ path: '', component: () => import('src/pages/info/InfoPage.vue') }]
   },
   // Always leave this as last one,
   // but you can also remove it

@@ -1,0 +1,9 @@
+.component__info {
+    &__list-container {
+        &__list-item {
+            &__section {
+                min-height: 60px;
+            }
+        }
+    }
+}

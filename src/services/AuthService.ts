@@ -24,4 +24,12 @@ export default class AuthService extends Api {
   async logout (): Promise< void> {
     await this.api.post('/auth/logout')
   }
+
+  async forgot (email:string): Promise< void> {
+    await this.api.post('/auth/forgot', { email })
+  }
+
+  async resetPassword (password:string, id:string): Promise< void> {
+    await this.api.post(`/auth/reset-password/${id}`, { password })
+  }
 }

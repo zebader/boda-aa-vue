@@ -7,8 +7,27 @@ import { AuthRequest } from '../../models/AuthModels'
 import { GuestRequest } from '../../models/GuestModels'
 import {
   Loading,
-  QSpinnerFacebook
+  QSpinnerFacebook,
+  Notify
 } from 'quasar'
+
+interface ApiError {
+    response:{
+        data: {
+            error: string;
+        },
+        status: number
+    }
+}
+
+export type ResetRequest = {
+    password:string,
+    id:string
+}
+
+const isApiError = (x: unknown): x is ApiError => {
+  return typeof x === 'object'
+}
 
 const actions: ActionTree<WeddingStateInterface, StateInterface> = {
   async getUser (context) {
@@ -54,7 +73,13 @@ const actions: ActionTree<WeddingStateInterface, StateInterface> = {
         context.commit('setUser', null)
       }
     } catch (error) {
-      console.log('store createUser error ', error)
+      if (isApiError(error)) {
+        if (error.response.status === 422) {
+          Notify.create({
+            message: error.response.data.error
+          })
+        }
+      }
       context.commit('setUser', null)
     }
 
@@ -72,7 +97,57 @@ const actions: ActionTree<WeddingStateInterface, StateInterface> = {
         context.commit('setUser', null)
       }
     } catch (error) {
-      console.log('store loginUser error ', error)
+      if (isApiError(error)) {
+        if (error.response.status === 404 || error.response.status === 401) {
+          Notify.create({
+            message: error.response.data.error
+          })
+        }
+      }
+      context.commit('setUser', null)
+    }
+
+    Loading.hide()
+  },
+  async forgot (context, email:string) {
+    const authService = new AuthService()
+    Loading.show({ spinner: QSpinnerFacebook })
+
+    try {
+      await authService.forgot(email)
+      Notify.create({
+        message: 'Email enviado correctamente, revisa tu correo'
+      })
+    } catch (error) {
+      if (isApiError(error)) {
+        if (error.response.status === 404 || error.response.status === 401) {
+          Notify.create({
+            message: error.response.data.error
+          })
+        }
+      }
+      context.commit('setUser', null)
+    }
+
+    Loading.hide()
+  },
+  async resetPassword (context, data:ResetRequest) {
+    const authService = new AuthService()
+    Loading.show({ spinner: QSpinnerFacebook })
+
+    try {
+      await authService.resetPassword(data.password, data.id)
+      Notify.create({
+        message: 'Contraseña restaurada, intenta loguearte de nuevo'
+      })
+    } catch (error) {
+      if (isApiError(error)) {
+        if (error.response.status === 422 || error.response.status === 404) {
+          Notify.create({
+            message: error.response.data.error
+          })
+        }
+      }
       context.commit('setUser', null)
     }
 

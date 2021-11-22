@@ -93,6 +93,12 @@ module.exports = configure(function (ctx) {
           spinnerSize: 40,
           spinnerColor: 'indigo',
           backgroundColor: 'primary'
+        },
+        notify: {
+          position: 'center',
+          timeout: 2500,
+          textColor: 'white',
+          actions: [{ icon: 'close', color: 'white' }]
         }
       },
 

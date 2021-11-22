@@ -1,24 +1,24 @@
 <template>
-  <div class="fullscreen bg-blue text-white text-center q-pa-md flex flex-center">
-    <div>
-      <div style="font-size: 30vh">
-        404
-      </div>
+  <div class="fullscreen text-center q-pa-md flex flex-center column">
+        <div class="row">
+            <q-img src="~assets/logo-boda-aa.png" width="80px" height="80px"/>
+        </div>
+        <div style="font-size: 10vh">
+            404
+        </div>
 
-      <div class="text-h2" style="opacity:.4">
-        Oops. Nothing here...
-      </div>
+        <div class="text-h6">
+            La pagina no existe
+        </div>
 
-      <q-btn
-        class="q-mt-xl"
-        color="white"
-        text-color="blue"
-        unelevated
-        to="/"
-        label="Go Home"
-        no-caps
-      />
-    </div>
+        <q-btn
+            class="q-mt-xl"
+            color="indigo"
+            unelevated
+            to="/"
+            label="Ir a inicio"
+            no-caps
+        />
   </div>
 </template>
 

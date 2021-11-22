@@ -2,11 +2,35 @@
     <transition
     appear
     enter-active-class="animated slideInUp">
-        <q-footer flat v-if="showMenu">
-                <q-toolbar class="bg-white row row justify-center">
-                    <q-btn v-if="showMenuButton" flat round dense icon="restaurant_menu" color="indigo" class="q-mx-sm" to="/"/>
-                    <q-separator spaced inset vertical dark />
-                    <q-btn color="indigo" flat round dense icon="logout" @click="doLogout" class="q-mx-sm" v-if="showLogout"/>
+        <q-footer flat v-if="showMenu" class="component__footer">
+                <q-toolbar class="bg-white">
+                    <div class="row justify-evenly component__footer__toolbar">
+
+                    <q-btn v-if="showMenuButton" flat dense color="indigo" to="/">
+                        <div class="column items-center justify-center q-ma-sm">
+                            <q-icon name="restaurant_menu" />
+                            <p class="q-ma-none">Inicio</p>
+                        </div>
+                    </q-btn>
+                    <q-btn v-if="showMenuButton" flat dense color="indigo" to="/hoteles">
+                        <div class="column items-center justify-center q-ma-sm">
+                            <q-icon name="bed" />
+                            <p class="q-ma-none">Hoteles</p>
+                        </div>
+                    </q-btn>
+                    <q-btn v-if="showMenuButton" flat dense color="indigo" to="/info">
+                        <div class="column items-center justify-center q-ma-sm">
+                            <q-icon name="commute" />
+                            <p class="q-ma-none">+Info</p>
+                        </div>
+                    </q-btn>
+                    <q-btn color="indigo" flat dense @click="doLogout" v-if="showLogout">
+                    <div class="column items-center justify-center q-ma-sm">
+                            <q-icon name="logout" />
+                            <p class="q-ma-none">Salir</p>
+                        </div>
+                    </q-btn>
+                    </div>
                 </q-toolbar>
 
                     <div class="q-pa-md full-width bg-positive" >

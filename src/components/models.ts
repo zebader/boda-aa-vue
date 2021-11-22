@@ -29,7 +29,7 @@ export interface GuestItem {
     id?: string | null
     name: string | null,
     intolerance?: string,
-    menu: Menu | null, // aqui molaria un enum
+    menu: Menu | null,
     bus: Bus | null,
 }
 
@@ -38,9 +38,32 @@ export interface UserItem {
     _id?:string | null,
     name: string | null,
     intolerance?: string,
-    menu: Menu | null, // aqui molaria un enum
+    menu: Menu | null,
     bus: Bus | null,
     guests?: Array<GuestItem>
+}
+
+export interface HotelItem {
+    image: string
+    name: string,
+    address: string,
+    phone: string,
+    mapsUrl: string,
+    web: string,
+    description?: string,
+}
+
+export interface InfoItem {
+    label: string,
+      icon: string,
+      caption: string,
+      template: string,
+      contact?: {
+          name:string,
+          phone:string,
+          nameIcon?:string,
+          phoneIcon?:string,
+      }[]
 }
 
 export interface OptionsModel {
