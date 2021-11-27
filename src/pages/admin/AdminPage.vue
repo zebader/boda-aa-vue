@@ -38,11 +38,13 @@ export interface GuestResponseCustom extends GuestResponse {
     email?: string | null,
 }
 
+export type Field = 'name' | 'menu' | 'bus' | 'intolerance' | 'username' | 'email';
+
 export type Column = {
     name:string,
     align?:string,
     label:string,
-    field:string | ((row:GuestResponse) => []),
+    field:Field,
     sortable?:boolean
 }
 
@@ -110,10 +112,11 @@ export default class AdminPage extends Vue {
     exportTable () {
       // naive encoding to csv format
       const content = [this.columns.map((col:Column) => this.wrapCsvValue(col.label))].concat(
-        this.guests.map((guest) => {
-          // TODO review types
-          // @ts-ignore
-          return this.columns.map(col => this.wrapCsvValue(guest[col.field])).join(',')
+        this.guests.map((guest:GuestResponseCustom) => {
+          return this.columns.map((col:Column) => {
+            const value = this.guests.length > 0 ? guest[col.field] : ''
+            return this.wrapCsvValue(value as string)
+          }).join(',')
         })
       ).join('\r\n')
 

@@ -80,35 +80,35 @@ import './footer-component.scss'
 
 export default class FooterComponent extends Vue {
     openGiftDialog = false
-  get showLogout ():boolean {
-    return !!this.$store.state.wedding.user
-  }
+    get showLogout ():boolean {
+      return !!this.$store.state.wedding.user
+    }
 
-  get routeButtonBlackList ():string[] {
-    return ['introduccion', 'invitacion', 'signin', 'login', 'forgot', 'reset-password']
-  }
+    get routeButtonBlackList ():string[] {
+      return ['introduccion', 'invitacion', 'signin', 'login', 'forgot', 'reset-password']
+    }
 
-  get routeMenuBlackList ():string[] {
-    return ['admin']
-  }
+    get routeMenuBlackList ():string[] {
+      return ['admin']
+    }
 
-  get showMenuButton ():boolean {
-      console.log(this.$route);
+    get showMenuButton ():boolean {
+      console.log(this.$route)
 
-    return !this.routeButtonBlackList.includes(this.$route.name as string || this.$route.matched[0].name as string)
-  }
+      return !this.routeButtonBlackList.includes(this.$route.name as string || this.$route.matched[0].name as string)
+    }
 
-  get showMenu ():boolean {
-    return !this.routeMenuBlackList.includes(this.$route.name as string || this.$route.matched[0].name as string)
-  }
+    get showMenu ():boolean {
+      return !this.routeMenuBlackList.includes(this.$route.name as string || this.$route.matched[0].name as string)
+    }
 
-  get showOnlyGift():boolean {
+    get showOnlyGift ():boolean {
       return true
-  }
+    }
 
-  async doLogout () {
-    await this.$store.dispatch('wedding/logoutUser')
+    async doLogout () {
+      await this.$store.dispatch('wedding/logoutUser')
       this.$router.push('/signin') as Promise<void>
-  }
+    }
 }
 </script>

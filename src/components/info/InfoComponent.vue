@@ -134,9 +134,9 @@ export default class InfoComponent extends Vue {
     }
     ]
   }
-  goToCall(phone:string) {
-      window.open(`tel:${phone}`);
-  }
 
+  goToCall (phone:string) {
+    window.open(`tel:${phone}`)
+  }
 }
 </script>

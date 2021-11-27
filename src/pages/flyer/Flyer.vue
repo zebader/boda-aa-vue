@@ -48,9 +48,9 @@ export default class flyerPage extends Vue {
     }
 
     mounted () {
-        setTimeout(() => {
+      setTimeout(() => {
             this.$router.push('/') as Promise<void>
-        }, 4000)
+      }, 4000)
     }
 }
 </script>
