@@ -22,4 +22,10 @@ export default class GuestService extends Api {
 
     await this.api.delete(`/api/guest/delete/${id}`)
   }
+
+  async allGuests (): Promise<GuestResponse[]> {
+    const response = await this.api.get('/api/guest/guests')
+
+    return response.data as GuestResponse[]
+  }
 }

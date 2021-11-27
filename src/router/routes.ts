@@ -3,6 +3,7 @@ import { RouteRecordRaw } from 'vue-router'
 const routes: RouteRecordRaw[] = [
   {
     path: '/',
+    name: 'inicio',
     component: () => import('layouts/HeaderLayout.vue'),
     props: {
       isCounter: true
@@ -10,12 +11,20 @@ const routes: RouteRecordRaw[] = [
     children: [{ path: '', component: () => import('src/pages/home/HomePage.vue') }]
   },
   {
-    path: '/welcome',
+    path: '/admin',
+    name: 'admin',
+    component: () => import('layouts/CleanLayout.vue'),
+    children: [{ path: '', component: () => import('src/pages/admin/AdminPage.vue') }]
+  },
+  {
+    path: '/invitacion',
+    name: 'invitacion',
     component: () => import('layouts/CleanLayout.vue'),
     children: [{ path: '', component: () => import('src/pages/splash/SplashPage.vue') }]
   },
   {
     path: '/login',
+    name: 'login',
     component: () => import('layouts/HeaderLayout.vue'),
     children: [
       { path: '', component: () => import('src/pages/login/LoginPage.vue') }
@@ -23,6 +32,7 @@ const routes: RouteRecordRaw[] = [
   },
   {
     path: '/forgot',
+    name: 'forgot',
     component: () => import('layouts/HeaderLayout.vue'),
     children: [
       { path: '', component: () => import('src/pages/forgot/ForgotPage.vue') }
@@ -30,6 +40,7 @@ const routes: RouteRecordRaw[] = [
   },
   {
     path: '/reset-password/:id',
+    name: 'reset-password',
     component: () => import('layouts/HeaderLayout.vue'),
     children: [
       { path: '', component: () => import('src/pages/reset-password/ResetPasswordPage.vue') }
@@ -37,6 +48,7 @@ const routes: RouteRecordRaw[] = [
   },
   {
     path: '/signin',
+    name: 'signin',
     component: () => import('layouts/HeaderLayout.vue'),
     children: [
       {
@@ -49,17 +61,20 @@ const routes: RouteRecordRaw[] = [
     ]
   },
   {
-    path: '/onboarding',
+    path: '/introduccion',
+    name: 'introduccion',
     component: () => import('layouts/HeaderLayout.vue'),
     children: [{ path: '', component: () => import('src/pages/onboarding/OnBoardingPage.vue') }]
   },
   {
     path: '/flyer',
+    name: 'flyer',
     component: () => import('layouts/HeaderLayout.vue'),
     children: [{ path: '', component: () => import('src/pages/flyer/Flyer.vue') }]
   },
   {
     path: '/hoteles',
+    name: 'hoteles',
     component: () => import('layouts/HeaderLayout.vue'),
     props: {
       isCounter: true
@@ -68,6 +83,7 @@ const routes: RouteRecordRaw[] = [
   },
   {
     path: '/info',
+    name: 'info',
     component: () => import('layouts/HeaderLayout.vue'),
     props: {
       isCounter: true

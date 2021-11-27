@@ -1,1 +1,21 @@
-<svg id="logo" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 342.37 359.97"><defs><style>.cls-1,.cls-3{fill:none;stroke:#444242;stroke-linejoin:bevel;}.cls-1{stroke-width:2.83px;}.cls-2{opacity:0.5;}.cls-3{stroke-width:1.42px;}</style></defs><title>logo</title><path class="cls-1" d="M82.44,313.27,170.84.39,126.64,354l-58-112.1C55,215.48,17,216.27,4.47,243.2h0q-.34.72-.64,1.45C-3,261.32,5.32,280.41,21.91,287.47Z"/><path class="cls-1" d="M259.93,313.27,171.53.39,215.73,354l58-112.1c13.65-26.39,51.66-25.61,64.21,1.33h0q.34.72.64,1.45c6.88,16.66-1.49,35.75-18.08,42.82Z"/><g class="cls-2"><path class="cls-3" d="M86.12,320.62,170.85,1.72,128.49,359.64,72.93,252.19c-13.08-25.3-49.52-24.55-61.54,1.27h0q-.32.69-.61,1.39c-6.59,16,1.43,34.27,17.33,41Z"/><path class="cls-3" d="M256.24,320.62,171.51,1.72l42.37,357.92,55.56-107.45c13.08-25.3,49.52-24.55,61.54,1.27h0q.32.69.61,1.39c6.59,16-1.43,34.27-17.33,41Z"/></g></svg>
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Generator: Adobe Illustrator 22.0.1, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<svg version="1.1" id="logo" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 viewBox="0 0 360 360" style="enable-background:new 0 0 360 360;" xml:space="preserve">
+<style type="text/css">
+	.st0{fill:none;stroke:#6B5612;stroke-width:2.83;stroke-linejoin:bevel;}
+	.st1{opacity:0.5;}
+	.st2{fill:none;stroke:#D4AF37;stroke-width:1.42;stroke-linejoin:bevel;}
+</style>
+<title>logo</title>
+<path class="st0" d="M91.2,313.3L179.6,0.4L135.4,354l-58-112.1c-13.6-26.4-51.6-25.6-64.1,1.3l0,0c-0.2,0.5-0.4,1-0.6,1.4
+	c-6.8,16.7,1.5,35.8,18.1,42.8L91.2,313.3z"/>
+<path class="st0" d="M268.7,313.3L180.3,0.4L224.5,354l58-112.1c13.6-26.4,51.7-25.6,64.2,1.3l0,0c0.2,0.5,0.4,1,0.6,1.4
+	c6.9,16.7-1.5,35.8-18.1,42.8L268.7,313.3z"/>
+<g class="st1">
+	<path class="st2" d="M94.9,320.6L179.7,1.7l-42.4,357.9L81.7,252.2c-13.1-25.3-49.5-24.6-61.5,1.3l0,0c-0.2,0.5-0.4,0.9-0.6,1.4
+		c-6.6,16,1.4,34.3,17.3,41L94.9,320.6z"/>
+	<path class="st2" d="M265,320.6L180.3,1.7l42.4,357.9l55.6-107.4c13.1-25.3,49.5-24.6,61.5,1.3l0,0c0.2,0.5,0.4,0.9,0.6,1.4
+		c6.6,16-1.4,34.3-17.3,41L265,320.6z"/>
+</g>
+</svg>

@@ -1,4 +1,4 @@
-# boda_aa_quasar (boda_aa_quasar)
+# Boda Angela y Adrian (Boda Angela y Adrian)
 
 A wedding planner app
 

@@ -24,7 +24,7 @@
                     val => isNameSucces(val)[0] || 'Rellena este campo'
                 ]">
                 <template v-slot:append v-if="isNameSucces(signInData.username)[0]">
-                    <q-icon name="check" color="green" />
+                    <q-icon name="check" color="positive" />
                 </template>
             </q-input>
             <q-input
@@ -41,7 +41,7 @@
                     val => isEmailSucces(val)[0] || 'No es un mail válido'
                 ]">
                 <template v-slot:append v-if="isEmailSucces(signInData.email)[0]">
-                    <q-icon name="check" color="green" />
+                    <q-icon name="check" color="positive" />
                 </template>
             </q-input>
             <q-input
@@ -57,7 +57,7 @@
                     val => isPhoneSucces(val)[0] || 'El teléfono debe contener solo números'
                 ]">
                 <template v-slot:append v-if="isPhoneSucces(signInData.phone)[0]">
-                    <q-icon name="check" color="green" />
+                    <q-icon name="check" color="positive" />
                 </template>
             </q-input>
             <q-input
@@ -75,7 +75,7 @@
                     val => isPasswordSucces(val)[0] || 'Debe contener al menos 8 caracteres'
                 ]">
                 <template v-slot:append v-if="isPasswordSucces(signInData.password)[0]">
-                    <q-icon name="check" color="green" />
+                    <q-icon name="check" color="positive" />
                 </template>
                 <template v-slot:hint>
                         Debe contener al menos 8 caracteres
@@ -175,7 +175,7 @@ export default class SignInComponent extends Vue {
 
       try {
         await this.$store.dispatch('wedding/createUser', this.signInData)
-        if (this.$store.state.wedding.user) this.$router.push('/onboarding') as Promise<void>
+        if (this.$store.state.wedding.user) this.$router.push('/introduccion') as Promise<void>
       } catch (error) {
         console.log(error)
       }

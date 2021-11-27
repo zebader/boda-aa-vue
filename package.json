@@ -1,8 +1,8 @@
 {
-  "name": "boda_aa_quasar",
+  "name": "Boda Angela y Adrian",
   "version": "0.0.1",
-  "description": "A wedding planner app",
-  "productName": "boda_aa_quasar",
+  "description": "Boda Angela y Adrian",
+  "productName": "Boda Angela y Adrian",
   "author": "Jesús Cebader <jcebader@mediktor.com>",
   "private": true,
   "scripts": {

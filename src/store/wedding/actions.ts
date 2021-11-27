@@ -191,6 +191,24 @@ const actions: ActionTree<WeddingStateInterface, StateInterface> = {
     }
 
     Loading.hide()
+  },
+  async getAllGuests (context) {
+    const guestService:GuestService = new GuestService()
+    Loading.show({ spinner: QSpinnerFacebook })
+
+    try {
+      const guests = await guestService.allGuests()
+      if (guests) {
+        context.commit('setGuests', guests)
+      } else {
+        context.commit('setGuests', null)
+      }
+    } catch (error) {
+      console.log('store getAllGuests error ', error)
+      context.commit('setGuests', null)
+    }
+
+    Loading.hide()
   }
 }
 

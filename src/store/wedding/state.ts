@@ -1,12 +1,15 @@
 import { AuthResponse } from '../../models/AuthModels'
+import { GuestResponse } from '../../models/GuestModels'
 
 export interface WeddingStateInterface {
-  user: AuthResponse | null
+  user: AuthResponse | null,
+  guests: GuestResponse[] | null,
 }
 
 function state (): WeddingStateInterface {
   return {
-    user: null
+    user: null,
+    guests: null
   }
 }
 

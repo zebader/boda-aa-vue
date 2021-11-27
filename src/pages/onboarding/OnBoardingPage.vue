@@ -2,7 +2,7 @@
     <q-page class="page__onboarding column items-start justify-start q-pa-md">
         <div class="page__onboarding__title-container column justify-center q-pb-lg q-mb-lg">
             <p class="page__onboarding__title-container__intro-text">
-                Bienvenido,<br><span>{{this.guestName}}</span>
+                Bienvenid@,<br><span>{{this.guestName}}</span>
             </p>
         </div>
         <OnBoardingStepper @onboarding-stepper-finished="showFinishDialog" :externStep="step"></OnBoardingStepper>
@@ -15,9 +15,9 @@
             <q-card class="bg-primary">
                 <q-toolbar class="bg-primary q-py-sm q-px-md">
                     <q-toolbar-title>
-                        <span class="text-h6">Resumen y finalizar</span>
+                        <span class="text-h6 text-indigo">Resumen y finalizar</span>
                     </q-toolbar-title>
-                    <q-btn flat round icon="close" @click="closeFinishDialog"></q-btn>
+                    <q-btn flat round icon="close" color="secondary" @click="closeFinishDialog"></q-btn>
                 </q-toolbar>
                 <q-separator />
                     <div class="page__onboarding__dialog__container column q-mb-xl q-pa-xl">
@@ -79,7 +79,7 @@ export default class OnBoardingPage extends Vue {
             Mi nombre es <span>${this.guestName}</span>, confirmo que <span>asistire</span> a la boda y que:<br><br>
             Elijo el menú de <span>${this.guestFinalInfo?.menu?.label ? this.guestFinalInfo.menu.label : ''}</span>,<br>
             <span>${this.guestFinalInfo.intolerance ? 'Si sufro intolerancias u otros : ' + this.guestFinalInfo.intolerance : 'No sufro intolerancias u otros'}</span><br>
-            y ${this.guestFinalInfo?.bus?.category === '2' ? '<span>no necesito transporte</span>' : `Necesito transporte desde <span>${this.guestFinalInfo?.bus?.label ? this.guestFinalInfo.bus.label : ''}</span>`}
+            y ${this.guestFinalInfo?.bus?.category === '2' ? '<span>no necesito transporte</span>' : `Necesito transporte desde <span>${this.guestFinalInfo?.bus?.label ? this.guestFinalInfo.bus.label : ''} a la finca</span>`}
         `
     }
 

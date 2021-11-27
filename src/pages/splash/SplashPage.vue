@@ -34,12 +34,12 @@
     <q-dialog v-model="showDialog">
       <q-card>
         <q-card-section>
-          <div class="text-h6">Por fin ha llegado el día</div>
+          <div class="text-h6 text-indigo">Por fin ha llegado el día</div>
         </q-card-section>
 
         <q-card-section class="q-pt-none">
             <p>
-                Como bien sabéis (y lo sabéis de verdad) nuestro enlace lleva preparándose mucho tiempo y no siempre ha sido fácil visualizar este día: ha tenido retrasos obligatorios, pandemias mundiales inesperadas, cambios de planes impuestos, “ensayos” en Soria y así, una tras otra, situaciones que hemos tenido que superar para alcanzar la meta, finalmente, el 30 de abril de 2022.
+                Como bien sabéis (y lo sabéis de verdad) nuestro enlace lleva preparándose mucho tiempo y no siempre ha sido fácil visualizar este día: ha tenido retrasos obligatorios, pandemias mundiales inesperadas, cambios de planes impuestos, “ensayos” en Soria y así, una tras otra, situaciones que hemos tenido que superar para alcanzar la meta, finalmente, <strong>el 30 de abril de 2022.</strong>
             </p>
             <p>
                 Hablando con honestidad, y cuando echamos la vista hacia atrás, en este camino “adicional” que hemos recorrido juntos desde el día que nos prometimos ( para la posteridad queda la pedida que preparó Adri con todo lujo de detalles) hemos aprendido muchas cosas pero nos gustaría destacar alguna de ellas.
@@ -54,7 +54,7 @@
                 Por último, deciros que llegamos a este día con muchísima ilusión y seguros del paso que vamos a dar, sin lugar a dudas lo haremos de la mano e intentando ser el mejor compañero y compañera el uno para el otro ( el objetivo es llegar a viejitos juntos para tomar vinos a diario en el porche de nuestra caravana en algún lugar perdido del resto del mundo).
             </p>
             <p>
-                Solo nos queda daros las gracias de nuevo por vuestra asistencia y por querer formar parte de este día para el recuerdo, os esperamos con muchas ganas el día 22 de abril de 2022.
+                Solo nos queda daros las gracias de nuevo por vuestra asistencia y por querer formar parte de este día para el recuerdo, os esperamos con muchas ganas el <strong>día 30 de abril de 2022.</strong>
             </p>
             <p class="text-right">
                 Adri y Angie

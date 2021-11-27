@@ -1,0 +1,28 @@
+.page__admin {
+    max-width: 1200px;
+    width: 100%;
+    margin: auto;
+    & th {
+        background-color: white;
+        color: $indigo;
+    }
+
+    .my-sticky-header-table {
+        /* height or max-height is important */
+        height: 100vh;
+
+        & thead tr th {
+            position: sticky;
+            z-index: 1;
+        }
+        & thead tr:first-child th {
+            top: 0
+        }
+
+
+        &.q-table--loading thead tr:last-child th {
+            top: 48px
+        }
+
+    }
+}

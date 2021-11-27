@@ -8,7 +8,7 @@
             flat
             active-color="indigo"
             active-icon="arrow_forward"
-            done-color="green"
+            done-color="positive"
             class="bg-transparent">
             <q-step
                 :name="1"
@@ -29,12 +29,12 @@
                     val => isNameSucces(val)[0] || 'Rellena este campo'
                 ]">
                 <template v-slot:append v-if="isNameSucces(this.guest.name)[0]">
-                    <q-icon name="check" color="green" />
+                    <q-icon name="check" color="positive" />
                 </template>
             </q-input>
 
                 <q-stepper-navigation class="q-pt-none">
-                    <q-btn @click="step = 2" color="indigo" label="Continuar" :disabled="!isNameSucces(this.guest.name)[0]"/>
+                    <q-btn unelevated @click="step = 2" color="indigo" label="Continuar" :disabled="!isNameSucces(this.guest.name)[0]"/>
                 </q-stepper-navigation>
             </q-step>
             <q-step
@@ -42,17 +42,17 @@
                 title="¿Podras asistir a la boda?"
                 prefix="1"
                 :done="step > 1" v-if="!isEditMode">
-                <p >La boda se celebrará el 30 de Abril de 2022 en Alcazar de San Juan...,
+                <p class="text-secondary">La boda se celebrará el <a class="component__onboarding-stepper__container__link" href="https://quintamonteguerra.com/en/location-html" target="_blank">30 de Abril de 2022 en Alcazar de San Juan, Quinta Monteguerra</a>,
                 Recuerda que hay transporte a tu disposición y descuentos en estancias</p>
 
                 <q-stepper-navigation>
-                    <q-btn @click="step = 2" color="indigo">
+                    <q-btn unelevated @click="step = 2" color="indigo">
                         <div>Si</div>
                         <q-tooltip anchor="top middle" self="center middle" class="bg-transparent">
                             <img width="40" class="q-mr-sm" src="~assets/heart.png">
                         </q-tooltip>
                     </q-btn>
-                    <q-btn flat @click="acceptedNo" color="indigo" label="No" class="q-ml-sm" />
+                    <q-btn unelevated flat @click="acceptedNo" color="indigo" label="No" class="q-ml-sm" />
                 </q-stepper-navigation>
             </q-step>
             <q-step
@@ -83,8 +83,8 @@
                 </q-select>
 
                 <q-stepper-navigation>
-                    <q-btn @click="step = 3" color="indigo" label="Continuar" :disabled="menuSubmitDisabled"/>
-                    <q-btn flat @click="step = 1" color="indigo" label="Atrás" class="q-ml-sm" />
+                    <q-btn unelevated @click="step = 3" color="indigo" label="Continuar" :disabled="menuSubmitDisabled"/>
+                    <q-btn unelevated flat @click="step = 1" color="indigo" label="Atrás" class="q-ml-sm" />
                 </q-stepper-navigation>
             </q-step>
             <q-step
@@ -92,16 +92,16 @@
                 title="¿Sufres alguna intolerancia o similar?"
                 prefix="3"
                 :done="step > 3">
-                    <q-btn @click="manageIntoleranceInput('yes')" color="indigo" label="Si" />
-                    <q-btn @click="manageIntoleranceInput('no')" color="indigo" label="No" class="q-ml-sm" />
-                    <q-btn flat
+                    <q-btn unelevated @click="manageIntoleranceInput('yes')" color="indigo" label="Si" />
+                    <q-btn unelevated @click="manageIntoleranceInput('no')" color="indigo" label="No" class="q-ml-sm" />
+                    <q-btn unelevated flat
                         @click="() => {
                             step = 2
                             intoleranceInputDisabled = true
                             } "
                             color="indigo" label="Atrás" class="q-ml-sm" v-if="intoleranceInputDisabled"/>
                     <div v-show="!intoleranceInputDisabled" class="q-mt-md">
-                        <p>Danos mas informacion y nos adaptaremos a tus necesidades:</p>
+                        <p class="text-secondary">Danos mas informacion y nos adaptaremos a tus necesidades:</p>
 
                         <q-input
                             v-model="intoleranceOption"
@@ -112,8 +112,8 @@
                             autogrow/>
 
                         <q-stepper-navigation>
-                            <q-btn @click="step = 4" color="indigo" label="Continuar" :disabled="!intoleranceOption"/>
-                            <q-btn flat
+                            <q-btn unelevated @click="step = 4" color="indigo" label="Continuar" :disabled="!intoleranceOption"/>
+                            <q-btn unelevated flat
                             @click="() => {
                                 step = 2
                                 intoleranceInputDisabled = true
@@ -124,10 +124,10 @@
             </q-step>
             <q-step
                 :name="4"
-                title="¿Necesitas transporte?"
+                title="¿Necesitas transporte a la finca?"
                 prefix="4"
                 :done="step > 4">
-                <p>Ponemos un autobus gratuito para ir a la finca</p>
+                <p class="text-secondary">Ponemos un autobus gratuito para ir de Alcazar a la finca</p>
                     <q-select
                         filled
                         color="indigo"
@@ -151,8 +151,8 @@
                     </template>
                 </q-select>
                 <q-stepper-navigation>
-                    <q-btn @click="submitStepper" color="indigo" label="Finalizar" :disabled="finishSubmitDisabled"/>
-                    <q-btn flat @click="step = 3" color="indigo" label="Atrás" class="q-ml-sm" />
+                    <q-btn unelevated @click="submitStepper" color="indigo" label="Finalizar" :disabled="finishSubmitDisabled"/>
+                    <q-btn unelevated flat @click="step = 3" color="indigo" label="Atrás" class="q-ml-sm" />
                 </q-stepper-navigation>
             </q-step>
         </q-stepper>
@@ -160,7 +160,7 @@
         <q-dialog v-model="openAcceptedNoDialog">
             <q-card>
                 <q-card-section>
-                <div class="text-h6">¿Segur@?</div>
+                <div class="text-h6 text-indigo">¿Segur@?</div>
                 </q-card-section>
 
                 <q-card-section class="q-pt-none">
@@ -168,7 +168,7 @@
                 </q-card-section>
 
                 <q-card-actions align="right">
-                    <q-btn flat label="Entendido" color="indigo" @click="openAcceptedNoDialog = false" />
+                    <q-btn flat unelevated label="Entendido" color="indigo" @click="openAcceptedNoDialog = false" />
                 </q-card-actions>
             </q-card>
         </q-dialog>

@@ -3,11 +3,10 @@
         <div class="q-mx-sm">
             <div v-for="hotel in hotelList" :key="hotel.name" class="q-pa-sm">
                 <q-card class="component__hotels__card full-width" flat bordered>
-                    <q-card-section horizontal>
-                        <q-img
-                        class="col"
-                        :src="hotel.image"
-                        style="min-width:40%;"
+                    <q-card-section>
+                        <q-parallax
+                            :src="hotel.image"
+                            :height="200"
                         />
 
                         <q-card-actions vertical class="justify-between q-pa-md">
@@ -50,11 +49,13 @@
                         </p>
                         <q-btn
                             unelevated
-                            class="full-width"
+                            rounded
+                            outline
+                            class="full-width q-my-sm"
                             size="lg"
-                            color="white"
+                            color="indigo"
                             @click="gotTo('https://www.escapadarural.com/casas-rurales/alcazar-de-san-juan')">
-                        <q-img fit="contain" :src="escapadaImg" height="40px"/>
+                        <q-img fit="contain" :src="escapadaImg" height="40px" class="q-my-xs"/>
                         </q-btn>
                     </q-card-section>
                     <q-card-section>
@@ -63,11 +64,13 @@
                         </p>
                         <q-btn
                             unelevated
-                            class="full-width"
-                            color="white"
+                            rounded
+                            outline
+                            class="full-width q-my-sm"
+                            color="indigo"
                             size="lg"
                             @click="gotTo('https://www.airbnb.es/s/Alc%C3%A1zar-de-San-Juan--Espa%C3%B1a/homes?adults=2&place_id=ChIJD38Nr-SuaQ0Rm_C3QE4kmSg&refinement_paths%5B%5D=%2Fhomes&checkin=2022-04-29&checkout=2022-05-01')">
-                        <q-img :src="airbnbImg" width="40px" height="40px"/>
+                        <q-img :src="airbnbImg" width="40px" height="40px" class="q-my-xs"/>
                         </q-btn>
                     </q-card-section>
                 </q-card>
@@ -84,6 +87,9 @@ import { HotelItem } from 'components/models'
 const hotelIntur: string = require('../../assets/hotel-intur.jpeg') as string
 const hotelInsula: string = require('../../assets/hotel-insula.jpg') as string
 const hotelHidalgo: string = require('../../assets/hotel-hidalgo.jpg') as string
+const hotelMolino: string = require('../../assets/hotel-molino.jpeg') as string
+const hotelJuan: string = require('../../assets/hotel-juan.jpg') as string
+const hotelWelcome: string = require('../../assets/hotel-welcome.jpg') as string
 const airbnb: string = require('../../assets/airbnb.png') as string
 const escapada: string = require('../../assets/escapada.png') as string
 
@@ -113,6 +119,30 @@ export default class HomeOptionsExpansionComponent extends Vue {
         mapsUrl: 'https://goo.gl/maps/5SeMhkMFS7SYQWv69',
         phone: '926 55 29 96',
         web: 'http://www.hidalgoquijada.es/'
+      },
+      {
+        image: hotelMolino,
+        name: 'Hotel Venta el molino',
+        address: 'Av. Cervera, 81, 13600 Alcázar de San Juan, Cdad. Real',
+        mapsUrl: 'https://goo.gl/maps/fYpeYTrgHGmkCC8o8',
+        phone: '926 58 88 50',
+        web: 'https://hotelventaelmolino.com/'
+      },
+      {
+        image: hotelJuan,
+        name: 'Viviendas turísticas San Juan',
+        address: 'C. Gral. Alcañiz, nº13, 13600 Alcázar de San Juan, Cdad. Real',
+        mapsUrl: 'https://goo.gl/maps/c22ingGvCYZyZKah9',
+        phone: '629 18 57 44',
+        web: 'https://www.viviendasturisticas-sanjuan.com/'
+      },
+      {
+        image: hotelWelcome,
+        name: 'Hostal Welcome2 Alcázar',
+        address: 'Av. Criptana, 11, 13600 Alcázar de San Juan, Cdad. Real',
+        mapsUrl: 'https://goo.gl/maps/GjWg4rXEjg8f6gtT9',
+        phone: '660 66 32 76',
+        web: 'https://www.welcome2alcazar.com/'
       }
     ];
 

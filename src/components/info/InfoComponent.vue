@@ -12,15 +12,21 @@
             </q-item-section>
         </template>
         <div class="q-ma-md" v-html="item.template"></div>
-        <div v-if="item.contact && item.contact.length > 0">
+        <div v-if="item.contact && item.contact.length > 0" class="q-pa-sm">
             <q-card flat bordered v-for="contact in item.contact" :key="contact.name" class="q-my-sm">
                 <q-card-section>
                     <div class="row items-center q-my-sm no-wrap">
-                        <q-icon flat round color="indigo" :name="contact.nameIcon" size="sm" class="q-mr-md"/>
+                        <q-icon flat round color="indigo" :name="contact.nameIcon" size="sm" class="q-mr-md q-ml-xs"/>
                         <p class="q-ma-none">{{contact.name}}</p>
                     </div>
                     <div class="row items-center q-my-sm no-wrap">
-                        <q-icon flat round color="indigo" :name="contact.phoneIcon" size="sm" class="q-mr-md"/>
+                        <q-btn
+                            unelevated round
+                            class="q-mr-md q-my-sm"
+                            :icon="contact.phoneIcon"
+                            color="indigo"
+                            size="sm"
+                            @click="goToCall(contact.phone)"/>
                         <p class="q-ma-none">{{contact.phone}}</p>
                     </div>
                 </q-card-section>
@@ -116,11 +122,21 @@ export default class InfoComponent extends Vue {
           phone: '926551306',
           nameIcon: 'brush',
           phoneIcon: 'phone'
+        },
+        {
+          name: 'Maquillaje - Pink Hair',
+          phone: '926551147',
+          nameIcon: 'brush',
+          phoneIcon: 'phone'
         }
       ]
 
     }
     ]
   }
+  goToCall(phone:string) {
+      window.open(`tel:${phone}`);
+  }
+
 }
 </script>

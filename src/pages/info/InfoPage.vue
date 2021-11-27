@@ -2,7 +2,7 @@
   <q-page class="page__info column items-center justify-start">
         <div class="page__info__title-container column justify-center q-mb-lg">
             <div class="row justify-center items-center">
-                <q-icon name="commute" color="indigo" size="sm" class="q-mx-sm"></q-icon>
+                <q-icon name="commute" color="secondary" size="sm" class="q-mx-sm"></q-icon>
             <p class="page__info__title-container__title q-mb-none">Mas información</p>
             </div>
 

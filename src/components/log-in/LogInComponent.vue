@@ -25,7 +25,7 @@
                     val => isEmailSucces(val)[0] || 'No es un mail válido'
                 ]">
                 <template v-slot:append v-if="isEmailSucces(loginData.email)[0]">
-                    <q-icon name="check" color="green" />
+                    <q-icon name="check" color="positive" />
                 </template>
             </q-input>
             <q-input
@@ -43,7 +43,7 @@
                     val => isPasswordSucces(val)[0] || 'Debe contener al menos 8 caracteres'
                 ]">
                 <template v-slot:append v-if="isPasswordSucces(loginData.password)[0]">
-                    <q-icon name="check" color="green" />
+                    <q-icon name="check" color="positive" />
                 </template>
             </q-input>
             <q-btn flat no-caps color="indigo" label="Olvide mi contraseña" size="md" class="q-ma-sm full-width" to="/forgot"/>
@@ -95,7 +95,7 @@ export default class LogInComponent extends Vue {
     async submitLogInForm () {
       try {
         await this.$store.dispatch('wedding/loginUser', this.loginData)
-        if (this.$store.state.wedding.user) this.$router.push('/onboarding') as Promise<void>
+        if (this.$store.state.wedding.user) this.$router.push('/introduccion') as Promise<void>
       } catch (error) {
         console.log(error)
       }

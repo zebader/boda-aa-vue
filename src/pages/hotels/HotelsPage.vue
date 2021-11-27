@@ -2,7 +2,7 @@
   <q-page class="page__hotels column items-center justify-start">
               <div class="page__hotels__title-container column justify-center q-mb-lg">
                   <div class="row justify-center items-center">
-                      <q-icon name="bed" color="indigo" size="sm" class="q-mx-sm"></q-icon>
+                      <q-icon name="bed" color="secondary" size="sm" class="q-mx-sm"></q-icon>
             <p class="page__hotels__title-container__title q-mb-none">Hoteles</p>
 
                   </div>

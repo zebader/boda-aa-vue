@@ -24,7 +24,7 @@
                     val => isEmailSucces(val)[0] || 'No es un mail válido'
                 ]">
                 <template v-slot:append v-if="isEmailSucces(email)[0]">
-                    <q-icon name="check" color="green" />
+                    <q-icon name="check" color="positive" />
                 </template>
             </q-input>
         </div>

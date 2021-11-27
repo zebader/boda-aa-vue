@@ -2,7 +2,7 @@
     <q-header unelevated v-if="isAround" class="bg-transparent component__header row justify-center">
         <q-toolbar class="component__header__toolbar q-pa-md ">
             <div class="row">
-                <q-img src="~assets/logo-boda-aa.png" width="40px" height="40px"/>
+                <router-link to="/"><q-img src="~assets/logo-boda-aa.png" width="40px" height="40px"/></router-link>
             </div>
             <q-toolbar-title></q-toolbar-title>
             <div class="row">

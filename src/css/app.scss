@@ -2,7 +2,7 @@
 // app global css in SCSS form
 #q-app {
     background-color: rgba($primary, 0.5);
-    background-image:url("../assets/background-marble.jpg");
+    // background-image:url("../assets/background-marble.jpg");
     min-height: 100vh;
 }
 .q-separator {
@@ -10,7 +10,7 @@
 }
 
 .q-card--bordered {
-    border: 1px solid rgba($secondary,0.2);
+    border: 1px solid rgba($indigo,0.2);
 }
 .q-card{
     border-radius: 10px;
@@ -18,5 +18,9 @@
 
 .disabled, [disabled] {
     opacity: 0.6 !important;
-    background-color: $grey !important;
+    background-color: $disabled !important;
+}
+
+.q-stepper__tab {
+    color: $disabled;
 }

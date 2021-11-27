@@ -4,4 +4,20 @@
         width: 100%;
         margin: auto;
     }
+    &__arrow{
+        animation-duration:2s;
+        animation-iteration-count:infinite;
+    }
+    &__container {
+        width: 100%;
+        &__intro-text {
+            color: $secondary;
+            & span {
+                color: $indigo;
+            }
+        }
+        &__carousel-text {
+            font-size: 14px;
+        }
+    }
 }

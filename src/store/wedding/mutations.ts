@@ -20,6 +20,9 @@ const mutation: MutationTree<WeddingStateInterface> = {
     if (state?.user && 'guests' in state.user) {
       state.user.guests = state.user.guests.filter(guest => guest._id !== payload)
     }
+  },
+  setGuests (state:WeddingStateInterface, payload:GuestResponse[]) {
+    state.guests = payload
   }
 }
 

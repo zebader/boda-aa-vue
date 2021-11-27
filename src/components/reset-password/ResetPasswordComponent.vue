@@ -26,7 +26,7 @@
                     val => isPasswordSucces(val)[0] || 'Debe contener al menos 8 caracteres'
                 ]">
                 <template v-slot:append v-if="isPasswordSucces(password)[0]">
-                    <q-icon name="check" color="green" />
+                    <q-icon name="check" color="positive" />
                 </template>
             </q-input>
         </div>

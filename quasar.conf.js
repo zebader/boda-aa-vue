@@ -155,9 +155,9 @@ module.exports = configure(function (ctx) {
       },
 
       manifest: {
-        name: 'boda_aa_quasar',
-        short_name: 'boda_aa_quasar',
-        description: 'A wedding planner app',
+        name: 'Boda Angela y Adrian',
+        short_name: 'Boda Angela y Adrian',
+        description: 'Boda Angela y Adrian',
         display: 'standalone',
         orientation: 'portrait',
         background_color: '#ffffff',
@@ -222,7 +222,7 @@ module.exports = configure(function (ctx) {
       builder: {
         // https://www.electron.build/configuration/configuration
 
-        appId: 'boda_aa_quasar'
+        appId: 'boda_angela_adrian'
       },
 
       // "chain" is a webpack-chain object https://github.com/neutrinojs/webpack-chain

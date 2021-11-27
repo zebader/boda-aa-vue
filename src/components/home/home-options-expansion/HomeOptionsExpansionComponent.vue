@@ -31,9 +31,9 @@
             <q-card class="bg-primary">
                 <q-toolbar class="bg-primary q-py-sm q-px-md">
                     <q-toolbar-title>
-                        <span class="text-h6">{{dialogTitle}}</span>
+                        <span class="text-h6 text-indigo">{{dialogTitle}}</span>
                     </q-toolbar-title>
-                    <q-btn flat round icon="close" @click="closeFinishDialog"></q-btn>
+                    <q-btn flat round icon="close" color="secondary" @click="closeFinishDialog"></q-btn>
                 </q-toolbar>
                 <q-separator />
                 <div class="component__home-options-expansion__dialog">
@@ -44,7 +44,7 @@
             <q-dialog v-model="openAlertDeleteGuest">
                 <q-card>
                     <q-card-section>
-                    <div class="text-h6">Eliminar acompañante</div>
+                    <div class="text-h6 text-indigo">Eliminar acompañante</div>
                     </q-card-section>
 
                     <q-card-section class="q-pt-none">
