@@ -95,7 +95,10 @@ export default class LogInComponent extends Vue {
     async submitLogInForm () {
       try {
         await this.$store.dispatch('wedding/loginUser', this.loginData)
-        if (this.$store.state.wedding.user) this.$router.push('/introduccion') as Promise<void>
+        if (this.$store.state.wedding.user) {
+          if (this.$store.state.wedding.user.role === 'admin') this.$router.push('/admin') as Promise<void>
+          else this.$router.push('/introduccion') as Promise<void>
+        }
       } catch (error) {
         console.log(error)
       }
