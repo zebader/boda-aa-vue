@@ -15,7 +15,7 @@
                 color="indigo"
                 v-model="signInData.username"
                 stack-label
-                label="Nombre completo ( 2 apellidos) *"
+                label="Nombre completo (2 apellidos) *"
                 class="q-mb-md"
                 placeholder="Ej. Adrian Cebader Rodriguez"
                 lazy-rules

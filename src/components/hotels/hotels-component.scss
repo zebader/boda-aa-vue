@@ -1,8 +1,12 @@
 .component__hotels {
     &__card {
         &__description {
-            color:$indigo;
-            font-size: 12px;
+            color:white;
+            font-size: 14px;
+            // font-weight: bold;
+            background-color: $indigo;
+            padding: 16px;
+            border-radius: 10px;
         }
     }
 }

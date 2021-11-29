@@ -42,16 +42,16 @@
                 Como bien sabéis (y lo sabéis de verdad) nuestro enlace lleva preparándose mucho tiempo y no siempre ha sido fácil visualizar este día: ha tenido retrasos obligatorios, pandemias mundiales inesperadas, cambios de planes impuestos, “ensayos” en Soria y así, una tras otra, situaciones que hemos tenido que superar para alcanzar la meta, finalmente, <strong>el 30 de abril de 2022.</strong>
             </p>
             <p>
-                Hablando con honestidad, y cuando echamos la vista hacia atrás, en este camino “adicional” que hemos recorrido juntos desde el día que nos prometimos ( para la posteridad queda la pedida que preparó Adri con todo lujo de detalles) hemos aprendido muchas cosas pero nos gustaría destacar alguna de ellas.
+                Hablando con honestidad, y cuando echamos la vista hacia atrás, en este camino “adicional” que hemos recorrido juntos desde el día que nos prometimos (para la posteridad queda la pedida que preparó Adri con todo lujo de detalles) hemos aprendido muchas cosas pero nos gustaría destacar alguna de ellas.
             </p>
             <p>
-                La primera es que somos unos afortunados por tener a tantísima gente buena a nuestro lado. No seremos nunca capaces de devolver tanto cariño y amor como el que hemos recibido de nuestros amigos y familiares durante los últimos 10 años y mas concretamente en estos últimos meses. Habéis llenado de seguridad las dudas, de generosidad los vacíos y de muchísimo cariño y amor ( cada uno a su manera jejeje) nuestras vidas.
+                La primera es que somos unos afortunados por tener a tantísima gente buena a nuestro lado. No seremos nunca capaces de devolver tanto cariño y amor como el que hemos recibido de nuestros amigos y familiares durante los últimos 10 años y mas concretamente en estos últimos meses. Habéis llenado de seguridad las dudas, de generosidad los vacíos y de muchísimo cariño y amor (cada uno a su manera jejeje) nuestras vidas.
             </p>
             <p>
                 En segundo lugar tenemos absolutamente claro que el día 30 de abril de 2022 es nuestro enlace y por ello celebraremos una gran fiesta pero queremos que todos sintáis que esa fiesta es también para vosotros y que no solo sois los invitados sino también sois los homenajeados.
             </p>
             <p>
-                Por último, deciros que llegamos a este día con muchísima ilusión y seguros del paso que vamos a dar, sin lugar a dudas lo haremos de la mano e intentando ser el mejor compañero y compañera el uno para el otro ( el objetivo es llegar a viejitos juntos para tomar vinos a diario en el porche de nuestra caravana en algún lugar perdido del resto del mundo).
+                Por último, deciros que llegamos a este día con muchísima ilusión y seguros del paso que vamos a dar, sin lugar a dudas lo haremos de la mano e intentando ser el mejor compañero y compañera el uno para el otro (el objetivo es llegar a viejitos juntos para tomar vinos a diario en el porche de nuestra caravana en algún lugar perdido del resto del mundo).
             </p>
             <p>
                 Solo nos queda daros las gracias de nuevo por vuestra asistencia y por querer formar parte de este día para el recuerdo, os esperamos con muchas ganas el <strong>día 30 de abril de 2022.</strong>

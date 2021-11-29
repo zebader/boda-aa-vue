@@ -65,7 +65,7 @@
                 </p>
                 <h5 class="q-ma-none text-bold text-indigo">ES05 1465 0100 9317 3539 3377</h5>
                 <p class="component__footer__container__carousel-text">
-                    Si, os resultara más cómodo, podéis también podéis utilizar Bizum.
+                    Si, os resultara más cómodo, también podéis utilizar <strong>Bizum.</strong>
                 </p>
             </div>
         </div>

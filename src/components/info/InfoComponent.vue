@@ -107,26 +107,26 @@ export default class InfoComponent extends Vue {
             Por lo anterior, os queremos facilitar algunas direcciones y teléfonos que pudierais necesitar u os pudieran resultar interesantes
         </p>
         <p>
-            Recordar que estos servicios pueden resultaros interesantes a muchos por lo que si estáis interesados es importante que concertéis una cita a la mayor brevedad posible.
+            <strong>Recordar que estos servicios pueden resultaros interesantes a muchos por lo que es importante que concertéis una cita a la mayor brevedad posible.</strong>
         </p>
         `,
       contact: [
         {
           name: 'Peluqueria - Peluqueria  Rosa Blanca',
           phone: '926551306',
-          nameIcon: 'iron',
+          nameIcon: 'content_cut',
           phoneIcon: 'phone'
         },
         {
           name: 'Maquillaje - Peluqueria  Rosa Blanca',
           phone: '926551306',
-          nameIcon: 'brush',
+          nameIcon: 'content_cut',
           phoneIcon: 'phone'
         },
         {
-          name: 'Maquillaje - Pink Hair',
+          name: 'Maquillaje/Peluquería - Pink Hair',
           phone: '926551147',
-          nameIcon: 'brush',
+          nameIcon: 'content_cut',
           phoneIcon: 'phone'
         }
       ]

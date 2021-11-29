@@ -77,9 +77,9 @@ export default class OnBoardingPage extends Vue {
     get resumeMessage ():string {
       return `
             Mi nombre es <span>${this.guestName}</span>, confirmo que <span>asistire</span> a la boda y que:<br><br>
-            Elijo el menú de <span>${this.guestFinalInfo?.menu?.label ? this.guestFinalInfo.menu.label : ''}</span>,<br>
-            <span>${this.guestFinalInfo.intolerance ? 'Si sufro intolerancias u otros : ' + this.guestFinalInfo.intolerance : 'No sufro intolerancias u otros'}</span><br>
-            y ${this.guestFinalInfo?.bus?.category === '2' ? '<span>no necesito transporte</span>' : `Necesito transporte desde <span>${this.guestFinalInfo?.bus?.label ? this.guestFinalInfo.bus.label : ''} a la finca</span>`}
+            Elijo el menú <span>${this.guestFinalInfo?.menu?.label ? this.guestFinalInfo.menu.label : ''}</span>,<br>
+            <span>${this.guestFinalInfo.intolerance ? 'si sufro intolerancias u otros : ' + this.guestFinalInfo.intolerance : 'no sufro intolerancias u otros'}</span><br>
+            y ${this.guestFinalInfo?.bus?.category === '2' ? '<span>no necesito transporte</span> a la finca' : `necesito transporte desde <span>${this.guestFinalInfo?.bus?.label ? this.guestFinalInfo.bus.label : ''}</span> a la finca`}
         `
     }
 

@@ -3,11 +3,24 @@
         width: 100%;
         color: $secondary;
         &__link {
+            text-decoration: underline;
             font-weight: bold;
+            color: $secondary;
+
             &:active {
+                text-decoration: none;
                 color: $secondary;
             }
             &:visited {
+                text-decoration: none;
+                color: $secondary;
+            }
+            &:focus {
+                text-decoration: none;
+                color: $secondary;
+            }
+            &:hover {
+                text-decoration: none;
                 color: $secondary;
             }
         }

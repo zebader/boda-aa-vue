@@ -20,7 +20,7 @@
                 color="indigo"
                 v-model="this.guest.name"
                 stack-label
-                label="Nombre completo ( 2 apellidos)*"
+                label="Nombre completo (2 apellidos)*"
                 class="q-mb-md"
                 placeholder="Ej. Adrian Cebader Rodriguez"
                 lazy-rules

@@ -45,7 +45,7 @@
                 <q-card class="component__hotels__card full-width" flat bordered>
                     <q-card-section>
                         <p>
-                        Si prefieres algo mas de independencia ( bien porque vengáis en grupo o por comodidad), hay algunas casa rurales cerca de donde se cogerá/dejara el autobús que nos lleve a la Quinta y que tal vez os merezcan la pena (las localidades están muy cerca unas de otra y es bastante económico trasladarse en taxi entre ellas). Podéis consultarlas en:
+                        Si prefieres algo mas de independencia (bien porque vengáis en grupo o por comodidad), hay algunas casa rurales cerca de donde se cogerá/dejara el autobús que nos lleve a la Quinta y que tal vez os merezcan la pena (las localidades están muy cerca unas de otra y es bastante económico trasladarse en taxi entre ellas). Podéis consultarlas en:
                         </p>
                         <q-btn
                             unelevated
