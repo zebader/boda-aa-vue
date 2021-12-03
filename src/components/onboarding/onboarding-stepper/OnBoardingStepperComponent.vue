@@ -43,7 +43,7 @@
                 prefix="1"
                 :done="step > 1" v-if="!isEditMode">
                 <p class="text-secondary">La boda se celebrará el <a class="component__onboarding-stepper__container__link" href="https://quintamonteguerra.com/en/location-html" target="_blank">30 de Abril de 2022 en Alcazar de San Juan, Quinta Monteguerra</a>,
-                Recuerda que hay transporte a tu disposición y descuentos en estancias</p>
+                Recuerda que hay transporte a tu disposición de Alcazar a la finca y descuentos en estancias</p>
 
                 <q-stepper-navigation>
                     <q-btn unelevated @click="step = 2" color="indigo">
@@ -124,7 +124,7 @@
             </q-step>
             <q-step
                 :name="4"
-                title="¿Necesitas transporte a la finca?"
+                title="¿Necesitas transporte de Alcazar a la finca?"
                 prefix="4"
                 :done="step > 4">
                 <p class="text-secondary">Ponemos un autobus gratuito para ir de Alcazar a la finca</p>

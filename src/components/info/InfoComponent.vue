@@ -13,7 +13,7 @@
         </template>
         <div class="q-ma-md" v-html="item.template"></div>
         <div v-if="item.contact && item.contact.length > 0" class="q-pa-sm">
-            <q-card flat bordered v-for="contact in item.contact" :key="contact.name" class="q-my-sm">
+            <q-card flat bordered v-for="contact in item.contact" :key="contact.name" class="component__info__list-container__card q-my-sm" @click="goToCall(contact.phone)">
                 <q-card-section>
                     <div class="row items-center q-my-sm no-wrap">
                         <q-icon flat round color="indigo" :name="contact.nameIcon" size="sm" class="q-mr-md q-ml-xs"/>
@@ -53,6 +53,9 @@ export default class InfoComponent extends Vue {
       icon: 'commute',
       caption: 'Toda la información sobre cómo llegar',
       template: `
+        <p class="text-indigo text-bold">
+            Recordar que hay autobuses que salir de forma gratuita desde la plaza de toros de Alcazar a la finca, si lo necesitais podeis añadirlo en vuestras preferencias llendo a INICIO.
+        </p>
         <p>
             Alcazar de San Juan se caracteriza por su red ferroviaria y la facilidad para acceder a ella a través del tren. Así, desde/hacia Madrid hay varios trenes que permiten ir y venir con comodidad (tanto en el día como en días diferentes) ya que el trayecto es de apenas 1 hora y media, por lo que si prefieres “pasar” del coche y venir a nuestro enlace en tren no te faltarán opciones!
         </p>

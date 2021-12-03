@@ -7,7 +7,7 @@
             appear
             enter-active-class="animated fadeIn page__splash__image-animation"
             leave-active-class="animated fadeOut page__splash__image-animation">
-                <p class="page__splash__title-container__title">Adrián y Ángela</p>
+                <p class="page__splash__title-container__title">Ángela y Adrián</p>
             </transition>
         </div>
         <!-- <q-img src="~assets/wedding-invitation.svg" width="65px" height="65px" class="q-ma-md"/> -->

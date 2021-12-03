@@ -7,7 +7,7 @@
             <q-toolbar-title></q-toolbar-title>
             <div class="row">
                 <div>
-                    <p class="component__header__toolbar__title text-right">Adrián y Ángela</p>
+                    <p class="component__header__toolbar__title text-right">Ángela y Adrián</p>
                     <p class="component__header__toolbar__subtitle text-right" v-if="!isCounter">30 de Abril de 2022</p>
                     <Countdown v-if="isCounter" :date="officialDate"></Countdown>
                 </div>

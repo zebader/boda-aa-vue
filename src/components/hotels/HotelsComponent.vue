@@ -35,6 +35,12 @@
                                     icon="location_on"
                                     color="indigo"
                                     @click="gotTo(hotel.mapsUrl)"/>
+                                <q-btn
+                                    unelevated round
+                                    class="q-ma-sm"
+                                    icon="phone"
+                                    color="indigo"
+                                    @click="goToCall(hotel.phone)"/>
                             </div>
                             <p class="component__hotels__card__description q-my-sm" v-if="hotel.description">{{hotel.description}}</p>
                         </q-card-actions>
@@ -102,7 +108,7 @@ export default class HomeOptionsExpansionComponent extends Vue {
         mapsUrl: 'https://goo.gl/maps/6ni3ZByU56hUJ1sdA',
         phone: '926 58 82 00',
         web: 'https://www.intur.com/hotel-alcazar-de-san-juan/',
-        description: '*Si reservas por teléfono e indicas que es para la boda de Adrián y Angela, te harán un descuento en el precio/noche de la habitación 😊'
+        description: '*Si reservas por teléfono e indicas que es para la boda de Angela y Adrián, te harán un descuento en el precio/noche de la habitación 😊'
       },
       {
         image: hotelInsula,
@@ -156,6 +162,10 @@ export default class HomeOptionsExpansionComponent extends Vue {
 
     gotTo (url:string) {
       window.open(url, '_blank')
+    }
+
+    goToCall (phone:string) {
+      window.open(`tel:${phone}`)
     }
 }
 </script>
