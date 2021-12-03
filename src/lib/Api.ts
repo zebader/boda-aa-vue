@@ -5,7 +5,7 @@ export default class Api {
 
     local = 'http://localhost:3000'
     // server = 'https://boda-aa.herokuapp.com/'
-    server = 'https://api.bodaangelayadri.com/'
+    server = 'http://api.bodaangelayadri.com/'
     constructor () {
       this.api = axios.create({ baseURL: this.server, withCredentials: true })
     }
