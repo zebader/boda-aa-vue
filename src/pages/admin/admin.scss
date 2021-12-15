@@ -1,5 +1,5 @@
 .page__admin {
-    max-width: 1200px;
+    max-width: 1500px;
     width: 100%;
     margin: auto;
     & th {
@@ -24,5 +24,12 @@
             top: 48px
         }
 
+    }
+
+    .q-table tbody td {
+        position: relative;
+        max-width: 150px;
+        text-overflow: ellipsis;
+        overflow: hidden;
     }
 }

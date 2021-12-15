@@ -13,5 +13,6 @@ export interface AuthResponse {
     id:string | null,
     email:string | null,
     role:string | null,
-    guests: GuestResponse[]
+    guests: GuestResponse[],
+    phone?:string | null,
 }

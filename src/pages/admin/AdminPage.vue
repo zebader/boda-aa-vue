@@ -23,6 +23,12 @@
                     dense
                     placeholder="Busca por nombre"
                     style="min-width:300px;"/>
+                <q-btn color="secondary" flat dense @click="openEditGuest(null)" class="q-mx-sm">
+                    <div class="column items-center justify-center q-ma-sm">
+                            <q-icon name="person_add" />
+                            <p class="q-ma-none">Añadir</p>
+                    </div>
+                </q-btn>
                 <q-btn color="secondary" flat dense @click="openResumeDialog = true" class="q-mx-sm">
                     <div class="column items-center justify-center q-ma-sm">
                             <q-icon name="assignment" />
@@ -41,6 +47,19 @@
                             <p class="q-ma-none">Salir</p>
                     </div>
                 </q-btn>
+            </template>
+            <template v-slot:body="props">
+                <q-tr :props="props">
+                    <q-td v-for="col in props.cols" :key="col.name" :props="props" auto-width>
+                        <div v-if="col.name === 'actions'">
+                            <q-btn class="q-mr-sm" color="indigo" round unelevated outline icon="delete" size="sm" @click="openDeleteGuest(props.row)"/>
+                            <q-btn color="indigo" round unelevated outline icon="edit" size="sm" @click="openEditGuest(props.row)"/>
+                        </div>
+                        <template v-else>
+                        {{col.value}}
+                        </template>
+                    </q-td>
+                </q-tr>
             </template>
             </q-table>
   </q-page>
@@ -68,23 +87,63 @@
             </ul>
         </div>
         </q-card>
+    </q-dialog>
 
+    <q-dialog v-model="openAlertDeleteGuest">
+        <q-card>
+            <q-card-section>
+            <div class="text-h6 text-indigo">Eliminar acompañante</div>
+            </q-card-section>
+
+            <q-card-section class="q-pt-none">
+                <p v-html="removeGuestMessage"></p>
+            </q-card-section>
+
+            <q-card-actions align="right">
+            <q-btn flat label="Eliminar" color="indigo" @click="deleteGuest" />
+            <q-btn flat label="No" color="indigo" @click="this.openAlertDeleteGuest = false, this.currentGuestToEdit = null" />
+            </q-card-actions>
+        </q-card>
+    </q-dialog>
+
+    <q-dialog
+        v-model="openDialog"
+        persistent
+        :maximized="maximizedToggle"
+        transition-show="slide-up"
+        transition-hide="slide-down">
+        <q-card class="bg-primary">
+            <q-toolbar class="bg-primary q-py-sm q-px-md">
+                <q-toolbar-title>
+                    <span class="text-h6 text-indigo">{{dialogTitle}}</span>
+                </q-toolbar-title>
+                <q-btn flat round icon="close" color="secondary" @click="closeFinishDialog"></q-btn>
+            </q-toolbar>
+            <q-separator />
+            <div class="component__home-options-expansion__dialog">
+                <OnBoardingStepperComponent @onboarding-stepper-finished="manageGuestData" :isEditMode="true" :externUser="currentGuestToEdit"></OnBoardingStepperComponent>
+            </div>
+        </q-card>
     </q-dialog>
 </template>
 
 <script lang="ts">
-import { Vue } from 'vue-class-component'
+import { Vue, Options } from 'vue-class-component'
 import { Watch } from 'vue-property-decorator'
 import { GuestResponse } from 'src/models/GuestModels'
+import { GuestFinalInfoModel, Menu, Bus } from 'components/models'
 import { exportFile } from 'quasar'
+import OnBoardingStepperComponent from 'components/onboarding/onboarding-stepper/OnBoardingStepperComponent.vue'
 import './admin.scss'
 
 export interface GuestResponseCustom extends GuestResponse {
     username?: string | null,
     email?: string | null,
+    phone?: string | null,
+    actions?: string | null,
 }
 
-export type Field = 'name' | 'menu' | 'bus' | 'intolerance' | 'username' | 'email';
+export type Field = 'name' | 'menu' | 'bus' | 'intolerance' | 'username' | 'email' | 'phone' | 'actions';
 
 export type Column = {
     name:string,
@@ -93,11 +152,17 @@ export type Column = {
     field:Field | null,
     sortable?:boolean
 }
-
+@Options({
+  components: { OnBoardingStepperComponent }
+})
 export default class AdminPage extends Vue {
     guests:GuestResponseCustom[] = []
     initialGuests:GuestResponseCustom[] = []
     openResumeDialog = false;
+    openAlertDeleteGuest = false;
+    openDialog = false;
+    maximizedToggle = true;
+    currentGuestToEdit:GuestResponseCustom | null = null
     text = '';
 
     pagination = {
@@ -122,18 +187,24 @@ export default class AdminPage extends Vue {
         { name: 'bus', align: 'left', label: 'Bus', field: 'bus', sortable: true },
         { name: 'intolerance', align: 'left', label: 'Intolerancia', field: 'intolerance' },
         { name: 'user', align: 'left', label: 'Invitado por', field: 'username', sortable: true },
-        { name: 'email', align: 'left', label: 'Contacto', field: 'email', sortable: true }]
+        { name: 'email', align: 'left', label: 'Contacto', field: 'email', sortable: true },
+        { name: 'phone', align: 'left', label: 'Teléfono', field: 'phone' },
+        { name: 'actions', align: 'left', label: 'Acciones', field: 'actions' }]
     }
 
     async mounted () {
       try {
-        await this.$store.dispatch('wedding/getAllGuests')
-        if (this.$store.state.wedding.guests && this.$store.state.wedding.guests.length > 0) {
-          this.guests = [...this.guestsTransformation(this.$store.state.wedding.guests)]
-          this.initialGuests = [...this.guests]
-        }
+        await this.fetchGuests()
       } catch (error) {
         console.log(error)
+      }
+    }
+
+    async fetchGuests () {
+      await this.$store.dispatch('wedding/getAllGuests')
+      if (this.$store.state.wedding.guests && this.$store.state.wedding.guests.length > 0) {
+        this.guests = [...this.guestsTransformation(this.$store.state.wedding.guests)]
+        this.initialGuests = [...this.guests]
       }
     }
 
@@ -147,7 +218,8 @@ export default class AdminPage extends Vue {
           intolerance: guest.intolerance,
           user: guest.user,
           username: guest.user ? guest.user[0].username : '',
-          email: guest.user ? guest.user[0].email : ''
+          email: guest.user ? guest.user[0].email : '',
+          phone: guest.user ? guest.user[0].phone : ''
         }
       })
     }
@@ -195,6 +267,96 @@ export default class AdminPage extends Vue {
     async doLogout () {
       await this.$store.dispatch('wedding/logoutUser')
       this.$router.push('/signin') as Promise<void>
+    }
+
+    get removeGuestMessage () :string {
+      return this.currentGuestToEdit?.name ? `<p>¿Eliminar a <strong>${this.currentGuestToEdit.name}</strong>?<p>` : ''
+    }
+
+    openDeleteGuest (guest:GuestResponseCustom) {
+      this.openAlertDeleteGuest = true
+      this.currentGuestToEdit = guest
+    }
+
+    openEditGuest (guest:GuestResponseCustom | null) {
+      this.openDialog = true
+      this.currentGuestToEdit = guest
+    }
+
+    closeFinishDialog () {
+      this.currentGuestToEdit = null
+      this.openDialog = false
+    }
+
+    async manageGuestData (guestInfo:GuestFinalInfoModel) {
+      guestInfo?.guest?._id ? await this.searchAndReplaceGuest(guestInfo) : await this.addNewGuest(guestInfo)
+      await this.fetchGuests()
+      this.text = ''
+      this.currentGuestToEdit = null
+      this.openDialog = false
+    }
+
+    async searchAndReplaceGuest (guestInfo:GuestFinalInfoModel) {
+      const guestId = guestInfo?.guest?._id && guestInfo.guest._id
+      const guestInfoToSend = {
+        _id: String(guestId),
+        name: guestInfo?.guest?.name ? guestInfo.guest.name : null,
+        intolerance: guestInfo.intolerance,
+        menu: guestInfo.menu?.value ? guestInfo.menu.value as Menu : null,
+        bus: guestInfo.bus?.value ? guestInfo.bus.value as Bus : null
+      }
+
+      await this.updateGuest(guestInfoToSend)
+    }
+
+    async addNewGuest (guestInfo:GuestFinalInfoModel) {
+      const guestId = guestInfo?.guest?._id && guestInfo.guest._id
+      const guestInfoToSend = {
+        _id: guestId,
+        name: guestInfo?.guest?.name ? guestInfo.guest.name : '',
+        intolerance: guestInfo.intolerance,
+        menu: guestInfo.menu?.value ? guestInfo.menu.value as Menu : null,
+        bus: guestInfo.bus?.value ? guestInfo.bus.value as Bus : null
+      }
+
+      await this.createGuest(guestInfoToSend)
+    }
+
+    async updateGuest (guest:GuestResponse) {
+      if (!guest._id) return
+      const { name, menu, bus, intolerance, _id } = guest
+
+      try {
+        await this.$store.dispatch('wedding/updateGuest', { _id, guest: { name, menu, bus, intolerance } })
+      } catch (error) {
+        console.log(error)
+      }
+    }
+
+    async createGuest (guest:GuestResponse) {
+      if (guest._id) return
+      const { name, menu, bus, intolerance } = guest
+      try {
+        await this.$store.dispatch('wedding/createGuest', { name, menu, bus, intolerance })
+      } catch (error) {
+        console.log(error)
+      }
+    }
+
+    get dialogTitle ():string {
+      return this.currentGuestToEdit?._id && this.currentGuestToEdit?.name ? `Editar datos de ${this.currentGuestToEdit.name}` : 'Anadir acompañante'
+    }
+
+    async deleteGuest () {
+      if (!this.currentGuestToEdit) return
+      try {
+        await this.$store.dispatch('wedding/deleteGuest', this.currentGuestToEdit._id)
+        await this.fetchGuests()
+        this.text = ''
+        this.openAlertDeleteGuest = false
+      } catch (error) {
+        console.log(error)
+      }
     }
 }
 </script>
