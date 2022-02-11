@@ -8,8 +8,9 @@
             <div class="row">
                 <div>
                     <p class="component__header__toolbar__title text-right">Ángela y Adrián</p>
-                    <p class="component__header__toolbar__subtitle text-right" v-if="!isCounter">30 de Abril de 2022</p>
+                    <p class="component__header__toolbar__subtitle text-right" v-if="!isCounter">30 de Abril de 2022 a las 12:30</p>
                     <Countdown v-if="isCounter" :date="officialDate"></Countdown>
+                    <p class="component__header__toolbar__date" v-if="isCounter"> 30 Abril a las 12:30 </p>
                 </div>
 
             </div>
@@ -31,7 +32,7 @@ export default class HeaderComponent extends Vue {
     @Prop({ required: false, default: false, type: Boolean }) isAround!:boolean;
 
     get officialDate ():string {
-      return 'Sat Apr 30 2022 00:00:00 GMT+0200'
+      return 'Sat Apr 30 2022 01:00:00 GMT+0200'
     }
 }
 </script>

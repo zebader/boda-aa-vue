@@ -42,7 +42,7 @@
                 title="¿Podras asistir a la boda?"
                 prefix="1"
                 :done="step > 1" v-if="!isEditMode">
-                <p class="text-secondary">La boda se celebrará el <a class="component__onboarding-stepper__container__link" href="https://quintamonteguerra.com/en/location-html" target="_blank">30 de Abril de 2022 en Alcazar de San Juan, Quinta Monteguerra</a>,
+                <p class="text-secondary">La boda se celebrará el <a class="component__onboarding-stepper__container__link" href="https://quintamonteguerra.com/en/location-html" target="_blank">30 de Abril de 2022 a las 12:30 en Alcazar de San Juan, Quinta Monteguerra</a>,
                 Recuerda que hay transporte a tu disposición de Alcazar a la finca y descuentos en estancias</p>
 
                 <q-stepper-navigation>

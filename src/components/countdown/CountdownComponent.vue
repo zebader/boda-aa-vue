@@ -1,13 +1,13 @@
 <template>
   <div class="component__countdown">
     <div class="component__countdown__wrapper" v-if="!isWeddingDay">
-        <div class="component__countdown__block row items-end" v-for="time in countdownClock" :key="time.text" >
+        <div class="component__countdown__block row items-center" v-for="time in countdownClock" :key="time.text" >
         <p class="component__countdown__block__digit q-my-none">{{ time.digit }}</p>
         <p class="component__countdown__block__text q-mx-xs q-my-none">{{time.text}}</p>
         </div>
     </div>
     <div class="component__countdown__wrapper" v-else>
-        <div class="component__countdown__block row items-end">
+        <div class="component__countdown__block row items-center">
             <p class="component__countdown__block__text q-mx-xs q-my-none">{{weddingDayText}}</p>
         </div>
     </div>
