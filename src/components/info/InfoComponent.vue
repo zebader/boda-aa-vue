@@ -57,7 +57,7 @@ export default class InfoComponent extends Vue {
             Recordar que hay autobuses que salir de forma gratuita desde la plaza de toros de Alcazar a la finca, si lo necesitais podeis añadirlo en vuestras preferencias llendo a INICIO.
         </p>
         <p>
-            Alcazar de San Juan se caracteriza por su red ferroviaria y la facilidad para acceder a ella a través del tren. Así, desde/hacia Madrid hay varios trenes que permiten ir y venir con comodidad (tanto en el día como en días diferentes) ya que el trayecto es de apenas 1 hora y media, por lo que si prefieres “pasar” del coche y venir a nuestro enlace en tren no te faltarán opciones!
+            <strong>Alcazar de San Juan</strong> se caracteriza por su red ferroviaria y la facilidad para acceder a ella a través del tren. Así, desde/hacia Madrid hay varios trenes que permiten ir y venir con comodidad (tanto en el día como en días diferentes) ya que el trayecto es de apenas 1 hora y media, por lo que si prefieres “pasar” del coche y venir a nuestro enlace en tren no te faltarán opciones!
         </p>
         <p>
             Además de una amplia oferta de trenes desde Madrid, al ser un importante nudo ferroviario, existen muchas combinaciones posibles desde otros puntos de España.
@@ -66,7 +66,7 @@ export default class InfoComponent extends Vue {
             Si prefieres utilizar tu propio vehículo Alcázar se encuentra excepcionalmente conectado con la A4 y la Autovía de los Viñedos por lo que no tendrás ningun problema para acceder.
         </p>
         <p>
-            Si para la asistencia a nuestro enlace has planeado un viaje en coche de ida y vuelta y prefieres ir directamente al lugar donde se celebrará el enlace, es decir Quinta Monteguerra, la dirección concreta es: Carretera Herencia, KM. 12,6, 13600, Ciudad Real.
+            Si para la asistencia a nuestro enlace has planeado un viaje en coche de ida y vuelta y prefieres ir directamente al lugar donde se celebrará el enlace, es decir <strong>Quinta Monteguerra</strong>, la dirección concreta es: <strong>Carretera Herencia, KM. 12,6, 13600, Ciudad Real.</strong>
         </p>
         <p>
             Por si necesitarás desplazarte entre localidades o dentro de la misma localidad, te facilitamos algunos teléfonos de taxi donde puedes llamar para concertar un servicio:
