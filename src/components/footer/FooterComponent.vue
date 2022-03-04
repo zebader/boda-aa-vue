@@ -49,7 +49,7 @@
         <q-card flat unelevated>
         <q-toolbar class="bg-primary q-py-sm q-px-md">
             <q-toolbar-title>
-                <q-icon name="redeem" color="indigo" size="sm" class="q-mr-md"/>
+                <span class="q-mr-md">&#128143;</span>
                 <span class="text-h6 text-indigo">Regalo de Bodas</span>
             </q-toolbar-title>
 
@@ -66,6 +66,9 @@
                 <h5 class="q-ma-none text-bold text-indigo">ES05 1465 0100 9317 3539 3377</h5>
                 <p class="component__footer__container__carousel-text">
                     Si, os resultara más cómodo, también podéis utilizar <strong>Bizum.</strong>
+                </p>
+                <p class="component__footer__container__carousel-text">
+                    <strong class="text-h6">&#128241; Angie - 699 88 89 65</strong>
                 </p>
             </div>
         </div>
